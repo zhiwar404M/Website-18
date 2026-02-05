@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فيديو برو - منصة الفيديو الاحترافية</title>
+    
+    <!-- فۆنتە باشەکانی عەرەبی -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Markazi+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -28,13 +31,32 @@
         }
 
         body {
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             background: var(--primary);
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.8;
+            text-align: right;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* چاککردنی دیزاینی عەرەبی */
+        .arabic-optimized {
+            letter-spacing: 0;
+            word-spacing: normal;
+            line-height: 1.8;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* ڕێکخستنی تەواوی نووسین بۆ عەرەبی */
+        .rtl-fix {
+            direction: rtl;
+            unicode-bidi: embed;
+        }
+
+        /* Subtle background pattern */
         body::before {
             content: '';
             position: fixed;
@@ -75,11 +97,11 @@
         }
 
         .logo {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 42px;
             font-weight: 700;
             color: var(--accent);
-            letter-spacing: -1px;
+            letter-spacing: 0;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -108,9 +130,10 @@
             border: 1px solid var(--border);
             background: var(--secondary);
             color: var(--text-primary);
-            font-size: 15px;
-            font-family: 'Almarai', sans-serif;
+            font-size: 16px;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             transition: all 0.3s ease;
+            text-align: right;
         }
 
         #searchInput:focus {
@@ -122,6 +145,7 @@
 
         #searchInput::placeholder {
             color: var(--text-secondary);
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
         }
 
         .search-icon {
@@ -144,9 +168,9 @@
             padding: 12px 28px;
             border-radius: 10px;
             border: none;
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
@@ -227,6 +251,7 @@
             transition: all 0.2s;
             cursor: pointer;
             font-weight: 500;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .dropdown-item:hover {
@@ -248,18 +273,20 @@
         }
 
         .page-title {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 52px;
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--text-primary);
-            letter-spacing: -1px;
+            letter-spacing: 0;
+            line-height: 1.3;
         }
 
         .page-subtitle {
             font-size: 18px;
             color: var(--text-secondary);
             font-weight: 300;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         /* Video Grid */
@@ -338,6 +365,7 @@
             font-size: 13px;
             font-weight: 700;
             border: 1px solid rgba(245, 158, 11, 0.3);
+            font-family: 'Almarai', sans-serif;
         }
 
         .video-info {
@@ -348,12 +376,13 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 12px;
-            line-height: 1.4;
+            line-height: 1.5;
             color: var(--text-primary);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            font-family: 'Noto Naskh Arabic', serif;
         }
 
         .video-meta {
@@ -363,6 +392,7 @@
             font-size: 14px;
             color: var(--text-secondary);
             flex-wrap: wrap;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .meta-item {
@@ -412,6 +442,7 @@
             justify-content: center;
             transition: all 0.3s;
             border: 1px solid var(--border);
+            font-family: 'Almarai', sans-serif;
         }
 
         .close-modal:hover {
@@ -446,12 +477,12 @@
         }
 
         .detail-title {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 16px;
             color: var(--text-primary);
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .detail-stats {
@@ -467,6 +498,7 @@
             gap: 8px;
             font-size: 15px;
             color: var(--text-secondary);
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .stat-icon {
@@ -479,6 +511,8 @@
             color: var(--text-secondary);
             font-size: 16px;
             margin-bottom: 40px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
+            text-align: justify;
         }
 
         /* Comments Section */
@@ -495,7 +529,7 @@
         }
 
         .comments-title {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 28px;
             font-weight: 700;
             color: var(--text-primary);
@@ -509,6 +543,7 @@
             font-size: 14px;
             font-weight: 700;
             border: 1px solid rgba(245, 158, 11, 0.2);
+            font-family: 'Almarai', sans-serif;
         }
 
         .comment-form {
@@ -527,11 +562,12 @@
             border: 1px solid var(--border);
             background: var(--secondary);
             color: var(--text-primary);
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             font-size: 15px;
             resize: vertical;
             margin-bottom: 16px;
             transition: all 0.3s;
+            text-align: right;
         }
 
         .comment-textarea:focus {
@@ -546,7 +582,7 @@
             padding: 12px 28px;
             border-radius: 10px;
             border: none;
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
@@ -596,18 +632,22 @@
         .comment-author {
             font-weight: 700;
             color: var(--text-primary);
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .comment-date {
             color: var(--text-secondary);
             font-size: 13px;
             margin-right: auto;
+            font-family: 'Almarai', sans-serif;
         }
 
         .comment-text {
             color: var(--text-secondary);
             line-height: 1.7;
             font-size: 15px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
+            text-align: justify;
         }
 
         .login-required {
@@ -622,6 +662,7 @@
             color: var(--text-secondary);
             margin-bottom: 20px;
             font-size: 15px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         /* Auth Modal */
@@ -663,7 +704,7 @@
             border: none;
             background: transparent;
             color: var(--text-secondary);
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', sans-serif;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
@@ -694,6 +735,7 @@
             color: var(--text-primary);
             font-weight: 600;
             font-size: 14px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .form-input {
@@ -703,9 +745,10 @@
             border: 1px solid var(--border);
             background: var(--primary);
             color: var(--text-primary);
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             font-size: 15px;
             transition: all 0.3s;
+            text-align: right;
         }
 
         .form-input:focus {
@@ -721,7 +764,7 @@
             border: 1px solid var(--border);
             background: var(--primary);
             color: var(--text-primary);
-            font-family: 'Almarai', sans-serif;
+            font-family: 'Noto Naskh Arabic', 'Almarai', sans-serif;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -743,6 +786,7 @@
             color: var(--text-secondary);
             position: relative;
             font-size: 14px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .divider::before,
@@ -785,7 +829,7 @@
         }
 
         .profile-name {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 10px;
@@ -795,6 +839,7 @@
         .profile-email {
             color: var(--text-secondary);
             font-size: 16px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         .profile-stats {
@@ -820,7 +865,7 @@
         }
 
         .stat-value {
-            font-family: 'Markazi Text', serif;
+            font-family: 'Noto Naskh Arabic', serif;
             font-size: 44px;
             font-weight: 700;
             color: var(--accent);
@@ -830,11 +875,12 @@
         .stat-label {
             color: var(--text-secondary);
             font-size: 14px;
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
 
         /* Responsive Design */
         
-        /* Mobile (حوالی 320px تا 480px) */
+        /* Mobile (حوالی 320px إلى 480px) */
         @media (max-width: 480px) {
             nav {
                 flex-direction: column;
@@ -874,6 +920,7 @@
             .page-title {
                 font-size: 32px;
                 text-align: center;
+                line-height: 1.2;
             }
             
             .page-subtitle {
@@ -900,6 +947,11 @@
                 padding: 15px;
             }
             
+            .video-title {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+            
             .modal-content {
                 margin: 10px;
                 border-radius: 15px;
@@ -911,6 +963,7 @@
             
             .detail-title {
                 font-size: 22px;
+                line-height: 1.3;
             }
             
             .detail-stats {
@@ -955,7 +1008,7 @@
             }
         }
 
-        /* Tablet (حوالی 481px تا 768px) */
+        /* Tablet (حوالی 481px إلى 768px) */
         @media (min-width: 481px) and (max-width: 768px) {
             nav {
                 padding: 15px 25px;
@@ -1016,7 +1069,7 @@
             }
         }
 
-        /* Laptop (حوالی 769px تا 1024px) */
+        /* Laptop (حوالی 769px إلى 1024px) */
         @media (min-width: 769px) and (max-width: 1024px) {
             nav {
                 padding: 18px 30px;
@@ -1048,7 +1101,7 @@
             }
         }
 
-        /* Desktop (حوالی 1025px تا 1440px) */
+        /* Desktop (حوالی 1025px إلى 1440px) */
         @media (min-width: 1025px) and (max-width: 1440px) {
             nav {
                 padding: 20px 40px;
@@ -1064,7 +1117,7 @@
             }
         }
 
-        /* Large Desktop (أکبر من 1440px) */
+        /* Large Desktop (أكبر من 1440px) */
         @media (min-width: 1441px) {
             nav {
                 padding: 20px 60px;
@@ -1189,6 +1242,7 @@
             padding: 80px 30px;
             font-size: 20px;
             color: var(--text-secondary);
+            font-family: 'Noto Naskh Arabic', sans-serif;
         }
         
         /* Loader Animation */
@@ -1245,10 +1299,6 @@
     <!-- Header -->
     <header>
         <nav>
-            <button class="menu-toggle hidden" aria-label="قائمة التنقل">
-                <span>☰</span>
-            </button>
-            
             <div class="logo">
                 <span class="logo-icon">▶️</span>
                 <span>فيديو برو</span>
@@ -1402,12 +1452,13 @@
         </div>
     </div>
 
-    <!-- JavaScript باقي همان -->
+    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
         import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_AUTH_DOMAIN",
@@ -1582,16 +1633,17 @@
     </script>
 
     <script>
+        // Videos Database
         const videos = [
             {
                 id: 1,
-                title: "أفضل فيلمً اجنبية ",
+                title: "تعلم البرمجة بلغة Python من الصفر",
                 thumbnail: "https://via.placeholder.com/400x300/F59E0B/1E293B?text=Python+Course",
                 duration: "15:30",
                 views: "1.2K",
-                uploadDate: "2026-02-01",
-                description: "افضل فيلم ",
-                streamtapeUrl: "https://streamtape.com/v/elB498DqQkCYR9A/SE-Upload_07OO6C8MCO65F6Q.mp4"
+                uploadDate: "2024-02-01",
+                description: "دورة شاملة لتعلم لغة Python من الأساسيات حتى الاحتراف. في هذا الفيديو سنتعلم الأساسيات والمفاهيم المهمة في البرمجة.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
             },
             {
                 id: 2,
@@ -1856,69 +1908,14 @@
             if (e.target === authModal) closeAuthModal();
         };
 
-        // Mobile menu toggle
-        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
-            document.querySelector('nav').classList.toggle('mobile-open');
-        });
-
-        // Touch gesture support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const swipeDistance = touchEndX - touchStartX;
-            
-            if (Math.abs(swipeDistance) > swipeThreshold) {
-                if (swipeDistance > 0) {
-                    // Swipe right - close modals
-                    if (document.getElementById('videoModal').style.display === 'block') {
-                        closeVideoModal();
-                    }
-                    if (document.getElementById('authModal').style.display === 'flex') {
-                        closeAuthModal();
-                    }
-                }
-            }
-        }
-
-        // Loader simulation for better UX
-        function simulateLoading() {
-            const loader = document.createElement('div');
-            loader.className = 'loader';
-            loader.style.position = 'fixed';
-            loader.style.top = '50%';
-            loader.style.left = '50%';
-            loader.style.transform = 'translate(-50%, -50%)';
-            loader.style.zIndex = '9999';
-            document.body.appendChild(loader);
-            
-            setTimeout(() => {
-                document.body.removeChild(loader);
-            }, 1000);
-        }
-
-        // Initialize
+        // Initialize the page
         displayVideos();
         document.getElementById('authButtons').classList.remove('hidden');
-
-        // Detect device type
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        const isTablet = /iPad|Tablet|PlayBook|Silk|Kindle/i.test(navigator.userAgent);
         
-        if (isMobile || isTablet) {
-            document.body.classList.add('touch-device');
-        }
+        // Add font loading optimization
+        document.fonts.ready.then(() => {
+            document.body.classList.add('fonts-loaded');
+        });
     </script>
-   <script src="adsterra-ads.htm1"></script>
 </body>
 </html>
