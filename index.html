@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فيديو برو - منصة الفيديو الاحترافية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Markazi+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0F172A;
+            --secondary: #1E293B;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --border: #334155;
+            --success: #10B981;
+            --danger: #EF4444;
+            --card-bg: #1E293B;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-family: 'Markazi Text', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            font-size: 36px;
+            filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.4));
+        }
+
+        .search-wrapper {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 14px 50px 14px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--secondary);
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: 'Almarai', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        #searchInput::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            border: none;
+            font-family: 'Almarai', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* User Menu */
+        .user-wrapper {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 120%;
+            left: 0;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .user-wrapper.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-family: 'Markazi Text', serif;
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* Video Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+
+        .video-thumbnail-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            background: linear-gradient(135deg, #1E293B, #0F172A);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.08);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: rgba(245, 158, 11, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary);
+            opacity: 0.95;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-card:hover .play-overlay {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: var(--accent);
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: var(--secondary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            font-size: 32px;
+            color: var(--text-primary);
+            cursor: pointer;
+            z-index: 3001;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .close-modal:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: rotate(90deg);
+            border-color: var(--accent);
+        }
+
+        .video-player {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-details {
+            padding: 40px;
+        }
+
+        .detail-header {
+            margin-bottom: 30px;
+        }
+
+        .detail-title {
+            font-family: 'Markazi Text', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .detail-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .stat-icon {
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .video-description {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .comments-title {
+            font-family: 'Markazi Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .comments-count {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .comment-form {
+            background: var(--primary);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .comment-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--secondary);
+            color: var(--text-primary);
+            font-family: 'Almarai', sans-serif;
+            font-size: 15px;
+            resize: vertical;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .comment-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .comment-submit {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 12px 28px;
+            border-radius: 10px;
+            border: none;
+            font-family: 'Almarai', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .comment-submit:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .comment {
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .comment:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .comment-date {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-right: auto;
+        }
+
+        .comment-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .login-required {
+            text-align: center;
+            padding: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            border: 1px dashed var(--border);
+        }
+
+        .login-required p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        /* Auth Modal */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-box {
+            background: var(--secondary);
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 480px;
+            width: 90%;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 35px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Almarai', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .auth-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--primary);
+            color: var(--text-primary);
+            font-family: 'Almarai', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--primary);
+            color: var(--text-primary);
+            font-family: 'Almarai', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+        }
+
+        .google-btn:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: var(--accent);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            color: var(--text-secondary);
+            position: relative;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider::before { right: 0; }
+        .divider::after { left: 0; }
+
+        /* Profile Page */
+        .profile-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 40px;
+        }
+
+        .profile-banner {
+            background: linear-gradient(135deg, var(--secondary), var(--card-bg));
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            margin: 0 auto 20px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .profile-name {
+            font-family: 'Markazi Text', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .profile-email {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-family: 'Markazi Text', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        
+        /* Mobile (حوالی 320px تا 480px) */
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 28px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .logo-icon {
+                font-size: 24px;
+            }
+            
+            .search-wrapper {
+                max-width: 100%;
+                order: 3;
+            }
+            
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+                text-align: center;
+            }
+            
+            .page-subtitle {
+                text-align: center;
+                font-size: 16px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .video-thumbnail-wrapper {
+                height: 180px;
+            }
+            
+            .play-overlay {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .video-info {
+                padding: 15px;
+            }
+            
+            .modal-content {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .video-details {
+                padding: 20px 15px;
+            }
+            
+            .detail-title {
+                font-size: 22px;
+            }
+            
+            .detail-stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                font-size: 13px;
+            }
+            
+            .profile-banner {
+                padding: 30px 20px;
+            }
+            
+            .profile-avatar-large {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .profile-name {
+                font-size: 28px;
+            }
+            
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-card {
+                padding: 25px;
+            }
+            
+            .stat-value {
+                font-size: 36px;
+            }
+            
+            .auth-box {
+                padding: 30px 20px;
+            }
+            
+            .auth-tabs {
+                flex-direction: column;
+            }
+        }
+
+        /* Tablet (حوالی 481px تا 768px) */
+        @media (min-width: 481px) and (max-width: 768px) {
+            nav {
+                padding: 15px 25px;
+            }
+            
+            .logo {
+                font-size: 32px;
+            }
+            
+            .search-wrapper {
+                max-width: 300px;
+            }
+            
+            .container {
+                padding: 30px 25px;
+            }
+            
+            .page-title {
+                font-size: 38px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .video-thumbnail-wrapper {
+                height: 200px;
+            }
+            
+            .modal-content {
+                margin: 20px;
+            }
+            
+            .video-details {
+                padding: 30px;
+            }
+            
+            .detail-title {
+                font-size: 28px;
+            }
+            
+            .profile-banner {
+                padding: 40px 30px;
+            }
+            
+            .profile-avatar-large {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-name {
+                font-size: 32px;
+            }
+            
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Laptop (حوالی 769px تا 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            nav {
+                padding: 18px 30px;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .search-wrapper {
+                max-width: 400px;
+            }
+            
+            .container {
+                padding: 40px 30px;
+            }
+            
+            .page-title {
+                font-size: 44px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+            
+            .profile-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Desktop (حوالی 1025px تا 1440px) */
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            nav {
+                padding: 20px 40px;
+            }
+            
+            .container {
+                padding: 50px 40px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 32px;
+            }
+        }
+
+        /* Large Desktop (أکبر من 1440px) */
+        @media (min-width: 1441px) {
+            nav {
+                padding: 20px 60px;
+            }
+            
+            .container {
+                padding: 60px 60px;
+            }
+            
+            .videos-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 35px;
+            }
+            
+            .video-card {
+                min-height: 320px;
+            }
+        }
+
+        /* Landscape Mode for Mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .auth-box {
+                max-height: 90vh;
+                overflow-y: auto;
+                margin: 20px;
+            }
+            
+            .modal-content {
+                max-height: 90vh;
+                overflow-y: auto;
+                margin: 20px;
+            }
+            
+            .video-player {
+                padding-bottom: 40%;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --primary: #F8FAFC;
+                --secondary: #E2E8F0;
+                --accent: #D97706;
+                --accent-light: #FBBF24;
+                --text-primary: #1E293B;
+                --text-secondary: #475569;
+                --border: #CBD5E1;
+                --card-bg: #FFFFFF;
+            }
+            
+            body::before {
+                background-image: 
+                    linear-gradient(rgba(217, 119, 6, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(217, 119, 6, 0.05) 1px, transparent 1px);
+            }
+            
+            header {
+                background: rgba(248, 250, 252, 0.95);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            header, .auth-modal, .video-modal {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .container {
+                max-width: 100% !important;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .video-card:hover {
+                transform: none;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .btn:hover, .dropdown-item:hover {
+                transform: none;
+            }
+            
+            .play-overlay {
+                opacity: 0.8;
+            }
+            
+            .dropdown-menu {
+                min-width: 180px;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .video-card:hover,
+            .btn:hover,
+            .play-overlay,
+            .dropdown-menu {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px 30px;
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+        
+        /* Loader Animation */
+        .loader {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Accessibility Improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus Styles for Keyboard Navigation */
+        *:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --accent: #FF9900;
+                --text-primary: #000000;
+                --text-secondary: #333333;
+            }
+            
+            .btn-primary {
+                background: black;
+                color: white;
+                border: 2px solid black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <button class="menu-toggle hidden" aria-label="قائمة التنقل">
+                <span>☰</span>
+            </button>
+            
+            <div class="logo">
+                <span class="logo-icon">▶️</span>
+                <span>فيديو برو</span>
+            </div>
+
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="nav-actions">
+                <div class="hidden" id="authButtons">
+                    <button class="btn btn-outline" onclick="openAuthModal('login')">تسجيل الدخول</button>
+                    <button class="btn btn-primary" onclick="openAuthModal('register')">إنشاء حساب</button>
+                </div>
+                
+                <div class="user-wrapper hidden" id="userWrapper">
+                    <img src="https://via.placeholder.com/100" alt="User" class="user-avatar" id="userAvatar">
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item" onclick="showProfile()">
+                            <span>👤</span>
+                            <span>الملف الشخصي</span>
+                        </a>
+                        <a href="#" class="dropdown-item" onclick="showVideos()">
+                            <span>📹</span>
+                            <span>الفيديوهات</span>
+                        </a>
+                        <div style="height: 1px; background: var(--border); margin: 8px 0;"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <span>🚪</span>
+                            <span>تسجيل الخروج</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container" id="mainContent">
+        <div class="page-header">
+            <h1 class="page-title">مكتبة الفيديو</h1>
+            <p class="page-subtitle">استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
+        </div>
+        <div class="videos-grid" id="videosGrid"></div>
+        <div class="no-results hidden" id="noResults">
+            لا توجد نتائج للبحث 🔍
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="profile-container hidden" id="profilePage">
+        <div class="profile-banner">
+            <img src="https://via.placeholder.com/120" alt="Profile" class="profile-avatar-large" id="profileAvatarLarge">
+            <h1 class="profile-name" id="profileName">اسم المستخدم</h1>
+            <p class="profile-email" id="profileEmail">user@example.com</p>
+        </div>
+
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalWatched">0</div>
+                <div class="stat-label">فيديو شاهدته</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalComments">0</div>
+                <div class="stat-label">التعليقات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="joinedDays">0</div>
+                <div class="stat-label">يوم في المنصة</div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="showVideos()" style="margin: 0 auto; display: block;">
+            العودة للفيديوهات
+        </button>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <span class="close-modal" onclick="closeVideoModal()">&times;</span>
+        <div class="modal-content">
+            <div class="video-player" id="videoPlayer"></div>
+            <div class="video-details" id="videoDetailsContent"></div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-box">
+            <span class="close-modal" onclick="closeAuthModal()" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; font-size: 24px;">&times;</span>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">تسجيل الدخول</button>
+                <button class="auth-tab" data-tab="register">إنشاء حساب</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm">
+                <button type="button" class="google-btn" onclick="loginWithGoogle()">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path fill="#4285F4" d="M19.6 10.23c0-.82-.1-1.42-.25-2.05H10v3.72h5.5c-.15.96-.74 2.31-2.04 3.22v2.45h3.16c1.89-1.73 2.98-4.3 2.98-7.34z"/>
+                        <path fill="#34A853" d="M13.46 15.13c-.83.59-1.96 1-3.46 1-2.64 0-4.88-1.74-5.68-4.15H1.07v2.52C2.72 17.75 6.09 20 10 20c2.7 0 4.96-.89 6.62-2.42l-3.16-2.45z"/>
+                        <path fill="#FBBC05" d="M3.99 10c0-.69.12-1.35.32-1.97V5.51H1.07A9.973 9.973 0 000 10c0 1.61.39 3.14 1.07 4.49l3.24-2.52c-.2-.62-.32-1.28-.32-1.97z"/>
+                        <path fill="#EA4335" d="M10 3.88c1.88 0 3.13.81 3.85 1.48l2.84-2.76C14.96.99 12.7 0 10 0 6.09 0 2.72 2.25 1.07 5.51l3.24 2.52C5.12 5.62 7.36 3.88 10 3.88z"/>
+                    </svg>
+                    تسجيل الدخول بواسطة Google
+                </button>
+
+                <div class="divider">أو</div>
+
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
+            </form>
+
+            <!-- Register Form -->
+            <form class="auth-form" id="registerForm">
+                <button type="button" class="google-btn" onclick="loginWithGoogle()">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path fill="#4285F4" d="M19.6 10.23c0-.82-.1-1.42-.25-2.05H10v3.72h5.5c-.15.96-.74 2.31-2.04 3.22v2.45h3.16c1.89-1.73 2.98-4.3 2.98-7.34z"/>
+                        <path fill="#34A853" d="M13.46 15.13c-.83.59-1.96 1-3.46 1-2.64 0-4.88-1.74-5.68-4.15H1.07v2.52C2.72 17.75 6.09 20 10 20c2.7 0 4.96-.89 6.62-2.42l-3.16-2.45z"/>
+                        <path fill="#FBBC05" d="M3.99 10c0-.69.12-1.35.32-1.97V5.51H1.07A9.973 9.973 0 000 10c0 1.61.39 3.14 1.07 4.49l3.24-2.52c-.2-.62-.32-1.28-.32-1.97z"/>
+                        <path fill="#EA4335" d="M10 3.88c1.88 0 3.13.81 3.85 1.48l2.84-2.76C14.96.99 12.7 0 10 0 6.09 0 2.72 2.25 1.07 5.51l3.24 2.52C5.12 5.62 7.36 3.88 10 3.88z"/>
+                    </svg>
+                    التسجيل بواسطة Google
+                </button>
+
+                <div class="divider">أو</div>
+
+                <div class="form-group">
+                    <label class="form-label">الاسم</label>
+                    <input type="text" class="form-input" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" id="registerPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript باقي همان -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        window.auth = auth;
+        window.db = db;
+        window.provider = provider;
+        window.currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.currentUser = user;
+                document.getElementById('authButtons').classList.add('hidden');
+                document.getElementById('userWrapper').classList.remove('hidden');
+                document.getElementById('userAvatar').src = user.photoURL || 'https://via.placeholder.com/100';
+                
+                if (document.getElementById('profileAvatarLarge')) {
+                    document.getElementById('profileAvatarLarge').src = user.photoURL || 'https://via.placeholder.com/120';
+                    document.getElementById('profileName').textContent = user.displayName || 'مستخدم';
+                    document.getElementById('profileEmail').textContent = user.email;
+                }
+            } else {
+                window.currentUser = null;
+                document.getElementById('authButtons').classList.remove('hidden');
+                document.getElementById('userWrapper').classList.add('hidden');
+            }
+        });
+
+        window.loginWithGoogle = async function() {
+            try {
+                await signInWithPopup(auth, provider);
+                closeAuthModal();
+                alert('تم تسجيل الدخول بنجاح! 🎉');
+            } catch (error) {
+                alert('خطأ: ' + error.message);
+            }
+        };
+
+        window.registerWithEmail = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+                closeAuthModal();
+                alert('تم إنشاء الحساب بنجاح! 🎉');
+            } catch (error) {
+                alert('خطأ: ' + error.message);
+            }
+        };
+
+        window.loginWithEmail = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                closeAuthModal();
+                alert('تم تسجيل الدخول بنجاح! 🎉');
+            } catch (error) {
+                alert('خطأ: ' + error.message);
+            }
+        };
+
+        window.logout = async function() {
+            try {
+                await signOut(auth);
+                alert('تم تسجيل الخروج بنجاح! 👋');
+                showVideos();
+            } catch (error) {
+                alert('خطأ: ' + error.message);
+            }
+        };
+
+        window.addComment = async function(videoId) {
+            if (!window.currentUser) {
+                alert('يجب تسجيل الدخول أولاً');
+                return;
+            }
+
+            const commentText = document.getElementById('commentText').value;
+            if (!commentText.trim()) {
+                alert('الرجاء كتابة تعليق');
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, 'comments'), {
+                    videoId: videoId,
+                    userId: window.currentUser.uid,
+                    userName: window.currentUser.displayName || 'مستخدم',
+                    userAvatar: window.currentUser.photoURL || 'https://via.placeholder.com/40',
+                    text: commentText,
+                    timestamp: serverTimestamp()
+                });
+
+                document.getElementById('commentText').value = '';
+                loadComments(videoId);
+                alert('تم إضافة التعليق بنجاح! 💬');
+            } catch (error) {
+                alert('خطأ: ' + error.message);
+            }
+        };
+
+        window.loadComments = async function(videoId) {
+            try {
+                const q = query(
+                    collection(db, 'comments'),
+                    where('videoId', '==', videoId),
+                    orderBy('timestamp', 'desc')
+                );
+                const querySnapshot = await getDocs(q);
+                
+                const commentsList = document.getElementById('commentsList');
+                const commentsCount = document.getElementById('commentsCount');
+                
+                commentsCount.textContent = querySnapshot.size;
+                
+                if (querySnapshot.empty) {
+                    commentsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 30px;">لا توجد تعليقات بعد. كن أول من يعلق! 🎯</p>';
+                    return;
+                }
+
+                commentsList.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const comment = doc.data();
+                    const date = comment.timestamp ? comment.timestamp.toDate() : new Date();
+                    const commentHTML = `
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img src="${comment.userAvatar}" alt="${comment.userName}" class="comment-avatar">
+                                <span class="comment-author">${comment.userName}</span>
+                                <span class="comment-date">${formatDate(date)}</span>
+                            </div>
+                            <p class="comment-text">${comment.text}</p>
+                        </div>
+                    `;
+                    commentsList.innerHTML += commentHTML;
+                });
+            } catch (error) {
+                console.error('Error loading comments:', error);
+            }
+        };
+
+        function formatDate(date) {
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+
+            if (diff < 60) return 'الآن';
+            if (diff < 3600) return Math.floor(diff / 60) + ' دقيقة';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' ساعة';
+            if (diff < 2592000) return Math.floor(diff / 86400) + ' يوم';
+            return date.toLocaleDateString('ar-SA');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', loginWithEmail);
+        document.getElementById('registerForm').addEventListener('submit', registerWithEmail);
+    </script>
+
+    <script>
+        const videos = [
+            {
+                id: 1,
+                title: "تعلم البرمجة بلغة Python من الصفر",
+                thumbnail: "https://via.placeholder.com/400x300/F59E0B/1E293B?text=Python+Course",
+                duration: "15:30",
+                views: "1.2K",
+                uploadDate: "2024-02-01",
+                description: "دورة شاملة لتعلم لغة Python من الأساسيات حتى الاحتراف. في هذا الفيديو سنتعلم الأساسيات والمفاهيم المهمة في البرمجة.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            },
+            {
+                id: 2,
+                title: "تصميم المواقع باستخدام HTML و CSS",
+                thumbnail: "https://via.placeholder.com/400x300/10B981/1E293B?text=Web+Design",
+                duration: "22:45",
+                views: "2.5K",
+                uploadDate: "2024-02-03",
+                description: "تعلم كيفية تصميم موقع ويب احترافي باستخدام HTML و CSS. مناسب للمبتدئين والمحترفين.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            },
+            {
+                id: 3,
+                title: "React.js للمبتدئين - الدليل الشامل",
+                thumbnail: "https://via.placeholder.com/400x300/6366F1/1E293B?text=React+JS",
+                duration: "18:20",
+                views: "3.1K",
+                uploadDate: "2024-02-05",
+                description: "دورة كاملة لتعلم React.js من الصفر. تعلم كيفية بناء تطبيقات ويب تفاعلية.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            },
+            {
+                id: 4,
+                title: "JavaScript من البداية للاحتراف",
+                thumbnail: "https://via.placeholder.com/400x300/F59E0B/1E293B?text=JavaScript",
+                duration: "25:10",
+                views: "4.3K",
+                uploadDate: "2024-01-28",
+                description: "كل ما تحتاج معرفته عن JavaScript. مناسب لجميع المستويات.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            },
+            {
+                id: 5,
+                title: "Node.js و Express - بناء Backend",
+                thumbnail: "https://via.placeholder.com/400x300/8B5CF6/1E293B?text=Node.js",
+                duration: "30:15",
+                views: "1.8K",
+                uploadDate: "2024-02-04",
+                description: "تعلم بناء Backend قوي باستخدام Node.js و Express. من إنشاء API إلى التعامل مع قواعد البيانات.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            },
+            {
+                id: 6,
+                title: "MongoDB - الأساسيات والتطبيق",
+                thumbnail: "https://via.placeholder.com/400x300/10B981/1E293B?text=MongoDB",
+                duration: "20:40",
+                views: "2.2K",
+                uploadDate: "2024-01-30",
+                description: "تعلم العمل مع MongoDB، قاعدة البيانات NoSQL. من التثبيت إلى العمليات المتقدمة.",
+                streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
+            }
+        ];
+
+        let searchTerm = '';
+
+        function displayVideos() {
+            const grid = document.getElementById('videosGrid');
+            const noResults = document.getElementById('noResults');
+            
+            let filteredVideos = videos;
+
+            if (searchTerm) {
+                filteredVideos = filteredVideos.filter(v => 
+                    v.title.includes(searchTerm) || 
+                    v.description.includes(searchTerm)
+                );
+            }
+
+            if (filteredVideos.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = filteredVideos.map(video => `
+                <div class="video-card" onclick="openVideo(${video.id})">
+                    <div class="video-thumbnail-wrapper">
+                        <img class="video-thumbnail" src="${video.thumbnail}" alt="${video.title}">
+                        <div class="play-overlay">▶</div>
+                        <div class="duration-badge">${video.duration}</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <div class="video-meta">
+                            <div class="meta-item">
+                                <span>👁️</span>
+                                <span>${video.views}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📅</span>
+                                <span>${formatUploadDate(video.uploadDate)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVideo(id) {
+            const video = videos.find(v => v.id === id);
+            if (!video) return;
+
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('videoPlayer');
+            const details = document.getElementById('videoDetailsContent');
+
+            player.innerHTML = `
+                <iframe 
+                    src="${video.streamtapeUrl}" 
+                    allowfullscreen 
+                    allow="autoplay; fullscreen"
+                    frameborder="0"
+                    scrolling="no">
+                </iframe>
+            `;
+
+            const commentSection = window.currentUser ? `
+                <div class="comment-form">
+                    <textarea 
+                        class="comment-textarea" 
+                        id="commentText" 
+                        placeholder="اكتب تعليقك هنا..."
+                    ></textarea>
+                    <button class="comment-submit" onclick="addComment(${video.id})">
+                        إضافة تعليق
+                    </button>
+                </div>
+            ` : `
+                <div class="login-required">
+                    <p>يجب تسجيل الدخول لإضافة تعليق</p>
+                    <button class="btn btn-primary" onclick="openAuthModal('login')">
+                        تسجيل الدخول
+                    </button>
+                </div>
+            `;
+
+            details.innerHTML = `
+                <div class="detail-header">
+                    <h2 class="detail-title">${video.title}</h2>
+                    <div class="detail-stats">
+                        <div class="stat-item">
+                            <span class="stat-icon">👁️</span>
+                            <span>${video.views} مشاهدة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">📅</span>
+                            <span>${formatUploadDate(video.uploadDate)}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">⏱️</span>
+                            <span>${video.duration}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-description">
+                    <p>${video.description}</p>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comments-header">
+                        <h3 class="comments-title">التعليقات</h3>
+                        <span class="comments-count" id="commentsCount">0</span>
+                    </div>
+                    
+                    ${commentSection}
+                    
+                    <div class="comments-list" id="commentsList"></div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            if (window.loadComments) {
+                window.loadComments(video.id);
+            }
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('videoPlayer').innerHTML = '';
+        }
+
+        function formatUploadDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+
+            if (diff === 0) return 'اليوم';
+            if (diff === 1) return 'أمس';
+            if (diff < 7) return 'منذ ' + diff + ' يوم';
+            if (diff < 30) return 'منذ ' + Math.floor(diff / 7) + ' أسبوع';
+            return 'منذ ' + Math.floor(diff / 30) + ' شهر';
+        }
+
+        function openAuthModal(tab) {
+            const modal = document.getElementById('authModal');
+            modal.style.display = 'flex';
+            
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            document.getElementById(tab + 'Form').classList.add('active');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function showProfile() {
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('profilePage').classList.remove('hidden');
+            
+            document.getElementById('totalWatched').textContent = '12';
+            document.getElementById('totalComments').textContent = '18';
+            document.getElementById('joinedDays').textContent = '45';
+        }
+
+        function showVideos() {
+            document.getElementById('mainContent').classList.remove('hidden');
+            document.getElementById('profilePage').classList.add('hidden');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchTerm = e.target.value;
+            displayVideos();
+        });
+
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tabName + 'Form').classList.add('active');
+            });
+        });
+
+        document.getElementById('userAvatar')?.addEventListener('click', () => {
+            document.getElementById('userWrapper').classList.toggle('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('userWrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                wrapper.classList.remove('active');
+            }
+        });
+
+        window.onclick = (e) => {
+            const videoModal = document.getElementById('videoModal');
+            const authModal = document.getElementById('authModal');
+            
+            if (e.target === videoModal) closeVideoModal();
+            if (e.target === authModal) closeAuthModal();
+        };
+
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('mobile-open');
+        });
+
+        // Touch gesture support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0) {
+                    // Swipe right - close modals
+                    if (document.getElementById('videoModal').style.display === 'block') {
+                        closeVideoModal();
+                    }
+                    if (document.getElementById('authModal').style.display === 'flex') {
+                        closeAuthModal();
+                    }
+                }
+            }
+        }
+
+        // Loader simulation for better UX
+        function simulateLoading() {
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            loader.style.position = 'fixed';
+            loader.style.top = '50%';
+            loader.style.left = '50%';
+            loader.style.transform = 'translate(-50%, -50%)';
+            loader.style.zIndex = '9999';
+            document.body.appendChild(loader);
+            
+            setTimeout(() => {
+                document.body.removeChild(loader);
+            }, 1000);
+        }
+
+        // Initialize
+        displayVideos();
+        document.getElementById('authButtons').classList.remove('hidden');
+
+        // Detect device type
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const isTablet = /iPad|Tablet|PlayBook|Silk|Kindle/i.test(navigator.userAgent);
+        
+        if (isMobile || isTablet) {
+            document.body.classList.add('touch-device');
+        }
+    </script>
+</body>
+</html>
