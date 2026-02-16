@@ -1,16 +1,137 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فيديو برو - منصة الفيديو الاحترافية</title>
+    <title>ڤیدیۆ پرۆ - پلاتفۆرمی ڤیدیۆی پیشەگەرانە</title>
     
-    <!-- فۆنتە باشەکانی عەرەبی -->
+    <!-- فۆنتە باشەکانی کوردی / عەرەبی -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <style>
+        /* باشترکردنی شێوازی نیشاندانی ڤیدیۆ */
+        .video-player iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-player {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+            margin-bottom: 20px;
+        }
+        
+        /* کارتی فیلم بە شێوازی جوانتر */
+        .video-card {
+            background: var(--surface);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .video-thumbnail-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+        
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.1);
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 60px;
+            height: 60px;
+            background: rgba(239, 68, 68, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(239, 68, 68, 0.5);
+        }
+        
+        .video-card:hover .play-overlay {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .duration-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ستایلی نوێ بۆ کارتی فیلم */
+        .video-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--background);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        /* responsive */
+        @media (max-width: 768px) {
+            .play-overlay {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -18,18 +139,18 @@
         <nav>
             <div class="logo">
                 <span class="logo-icon">▶️</span>
-                <span>فيديو برو</span>
+                <span>ڤیدیۆ پرۆ</span>
             </div>
 
             <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
+                <input type="text" id="searchInput" placeholder="گەڕان بۆ ڤیدیۆ...">
                 <span class="search-icon">🔍</span>
             </div>
 
             <div class="nav-actions">
                 <div class="hidden" id="authButtons">
-                    <button class="btn btn-outline" onclick="openAuthModal('login')">تسجيل الدخول</button>
-                    <button class="btn btn-primary" onclick="openAuthModal('register')">إنشاء حساب</button>
+                    <button class="btn btn-outline" onclick="openAuthModal('login')">چوونەژوورەوە</button>
+                    <button class="btn btn-primary" onclick="openAuthModal('register')">دروستکردنی هەژمار</button>
                 </div>
                 
                 <div class="user-wrapper hidden" id="userWrapper">
@@ -37,16 +158,16 @@
                     <div class="dropdown-menu">
                         <a href="#" class="dropdown-item" onclick="showProfile()">
                             <span>👤</span>
-                            <span>الملف الشخصي</span>
+                            <span>پڕۆفایل</span>
                         </a>
                         <a href="#" class="dropdown-item" onclick="showVideos()">
                             <span>📹</span>
-                            <span>الفيديوهات</span>
+                            <span>ڤیدیۆکان</span>
                         </a>
                         <div style="height: 1px; background: var(--border); margin: 8px 0;"></div>
                         <a href="#" class="dropdown-item" onclick="logout()">
                             <span>🚪</span>
-                            <span>تسجيل الخروج</span>
+                            <span>چوونەدەرەوە</span>
                         </a>
                     </div>
                 </div>
@@ -57,12 +178,12 @@
     <!-- Main Content -->
     <div class="container" id="mainContent">
         <div class="page-header">
-            <h1 class="page-title">مكتبة الفيديو</h1>
-            <p class="page-subtitle">استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
+            <h1 class="page-title">کتێبخانەی ڤیدیۆ</h1>
+            <p class="page-subtitle">گەڕان لە نێوان ڤیدیۆی جۆراوجۆری کوالێتی بەرزدا</p>
         </div>
         <div class="videos-grid" id="videosGrid"></div>
         <div class="no-results hidden" id="noResults">
-            لا توجد نتائج للبحث 🔍
+            هیچ ڤیدیۆیەک نەدۆزرایەوە 🔍
         </div>
     </div>
 
@@ -70,27 +191,27 @@
     <div class="profile-container hidden" id="profilePage">
         <div class="profile-banner">
             <img src="https://via.placeholder.com/120" alt="Profile" class="profile-avatar-large" id="profileAvatarLarge">
-            <h1 class="profile-name" id="profileName">اسم المستخدم</h1>
+            <h1 class="profile-name" id="profileName">ناوی بەکارهێنەر</h1>
             <p class="profile-email" id="profileEmail">user@example.com</p>
         </div>
 
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-value" id="totalWatched">0</div>
-                <div class="stat-label">فيديو شاهدته</div>
+                <div class="stat-label">ڤیدیۆی بینراو</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="totalComments">0</div>
-                <div class="stat-label">التعليقات</div>
+                <div class="stat-label">بۆچوونەکان</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="joinedDays">0</div>
-                <div class="stat-label">يوم في المنصة</div>
+                <div class="stat-label">ڕۆژ لە پلاتفۆرمدا</div>
             </div>
         </div>
 
         <button class="btn btn-primary" onclick="showVideos()" style="margin: 0 auto; display: block;">
-            العودة للفيديوهات
+            گەڕانەوە بۆ ڤیدیۆکان
         </button>
     </div>
 
@@ -109,8 +230,8 @@
             <span class="close-modal" onclick="closeAuthModal()" style="position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; font-size: 24px;">&times;</span>
             
             <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">تسجيل الدخول</button>
-                <button class="auth-tab" data-tab="register">إنشاء حساب</button>
+                <button class="auth-tab active" data-tab="login">چوونەژوورەوە</button>
+                <button class="auth-tab" data-tab="register">دروستکردنی هەژمار</button>
             </div>
 
             <!-- Login Form -->
@@ -122,20 +243,20 @@
                         <path fill="#FBBC05" d="M3.99 10c0-.69.12-1.35.32-1.97V5.51H1.07A9.973 9.973 0 000 10c0 1.61.39 3.14 1.07 4.49l3.24-2.52c-.2-.62-.32-1.28-.32-1.97z"/>
                         <path fill="#EA4335" d="M10 3.88c1.88 0 3.13.81 3.85 1.48l2.84-2.76C14.96.99 12.7 0 10 0 6.09 0 2.72 2.25 1.07 5.51l3.24 2.52C5.12 5.62 7.36 3.88 10 3.88z"/>
                     </svg>
-                    تسجيل الدخول بواسطة Google
+                    چوونەژوورەوە لە ڕێگەی Google
                 </button>
 
-                <div class="divider">أو</div>
+                <div class="divider">یان</div>
 
                 <div class="form-group">
-                    <label class="form-label">البريد الإلكتروني</label>
+                    <label class="form-label">ئیمەیڵ</label>
                     <input type="email" class="form-input" id="loginEmail" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">كلمة المرور</label>
+                    <label class="form-label">وشەی نهێنی</label>
                     <input type="password" class="form-input" id="loginPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل الدخول</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">چوونەژوورەوە</button>
             </form>
 
             <!-- Register Form -->
@@ -147,24 +268,24 @@
                         <path fill="#FBBC05" d="M3.99 10c0-.69.12-1.35.32-1.97V5.51H1.07A9.973 9.973 0 000 10c0 1.61.39 3.14 1.07 4.49l3.24-2.52c-.2-.62-.32-1.28-.32-1.97z"/>
                         <path fill="#EA4335" d="M10 3.88c1.88 0 3.13.81 3.85 1.48l2.84-2.76C14.96.99 12.7 0 10 0 6.09 0 2.72 2.25 1.07 5.51l3.24 2.52C5.12 5.62 7.36 3.88 10 3.88z"/>
                     </svg>
-                    التسجيل بواسطة Google
+                    تۆمارکردن لە ڕێگەی Google
                 </button>
 
-                <div class="divider">أو</div>
+                <div class="divider">یان</div>
 
                 <div class="form-group">
-                    <label class="form-label">الاسم</label>
+                    <label class="form-label">ناو</label>
                     <input type="text" class="form-input" id="registerName" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">البريد الإلكتروني</label>
+                    <label class="form-label">ئیمەیڵ</label>
                     <input type="email" class="form-input" id="registerEmail" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">كلمة المرور</label>
+                    <label class="form-label">وشەی نهێنی</label>
                     <input type="password" class="form-input" id="registerPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">دروستکردنی هەژمار</button>
             </form>
         </div>
     </div>
@@ -175,7 +296,7 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
         import { getFirestore, collection, addDoc, query, where, getDocs, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // Firebase Configuration
+        // Firebase Configuration - پێویستە بە ڕاستەقینەکانی خۆت بیاننێریت
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_AUTH_DOMAIN",
@@ -204,7 +325,7 @@
                 
                 if (document.getElementById('profileAvatarLarge')) {
                     document.getElementById('profileAvatarLarge').src = user.photoURL || 'https://via.placeholder.com/120';
-                    document.getElementById('profileName').textContent = user.displayName || 'مستخدم';
+                    document.getElementById('profileName').textContent = user.displayName || 'بەکارهێنەر';
                     document.getElementById('profileEmail').textContent = user.email;
                 }
             } else {
@@ -218,9 +339,9 @@
             try {
                 await signInWithPopup(auth, provider);
                 closeAuthModal();
-                alert('تم تسجيل الدخول بنجاح! 🎉');
+                alert('بە سەرکەوتوویی چوویتە ژوورەوە! 🎉');
             } catch (error) {
-                alert('خطأ: ' + error.message);
+                alert('هەڵە: ' + error.message);
             }
         };
 
@@ -234,9 +355,9 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 await updateProfile(userCredential.user, { displayName: name });
                 closeAuthModal();
-                alert('تم إنشاء الحساب بنجاح! 🎉');
+                alert('هەژمارەکەت بە سەرکەوتوویی دروست کرا! 🎉');
             } catch (error) {
-                alert('خطأ: ' + error.message);
+                alert('هەڵە: ' + error.message);
             }
         };
 
@@ -248,31 +369,31 @@
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 closeAuthModal();
-                alert('تم تسجيل الدخول بنجاح! 🎉');
+                alert('بە سەرکەوتوویی چوویتە ژوورەوە! 🎉');
             } catch (error) {
-                alert('خطأ: ' + error.message);
+                alert('هەڵە: ' + error.message);
             }
         };
 
         window.logout = async function() {
             try {
                 await signOut(auth);
-                alert('تم تسجيل الخروج بنجاح! 👋');
+                alert('بە سەرکەوتوویی چوویتە دەرەوە! 👋');
                 showVideos();
             } catch (error) {
-                alert('خطأ: ' + error.message);
+                alert('هەڵە: ' + error.message);
             }
         };
 
         window.addComment = async function(videoId) {
             if (!window.currentUser) {
-                alert('يجب تسجيل الدخول أولاً');
+                alert('پێویستە بچیتە ژوورەوە');
                 return;
             }
 
             const commentText = document.getElementById('commentText').value;
             if (!commentText.trim()) {
-                alert('الرجاء كتابة تعليق');
+                alert('تکایە بۆچوونێک بنووسە');
                 return;
             }
 
@@ -280,7 +401,7 @@
                 await addDoc(collection(db, 'comments'), {
                     videoId: videoId,
                     userId: window.currentUser.uid,
-                    userName: window.currentUser.displayName || 'مستخدم',
+                    userName: window.currentUser.displayName || 'بەکارهێنەر',
                     userAvatar: window.currentUser.photoURL || 'https://via.placeholder.com/40',
                     text: commentText,
                     timestamp: serverTimestamp()
@@ -288,9 +409,9 @@
 
                 document.getElementById('commentText').value = '';
                 loadComments(videoId);
-                alert('تم إضافة التعليق بنجاح! 💬');
+                alert('بۆچوونەکەت زیاد کرا! 💬');
             } catch (error) {
-                alert('خطأ: ' + error.message);
+                alert('هەڵە: ' + error.message);
             }
         };
 
@@ -309,7 +430,7 @@
                 commentsCount.textContent = querySnapshot.size;
                 
                 if (querySnapshot.empty) {
-                    commentsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 30px;">لا توجد تعليقات بعد. كن أول من يعلق! 🎯</p>';
+                    commentsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 30px;">هێشتا هیچ بۆچوونێک نییە. یەکەم کەس بە! 🎯</p>';
                     return;
                 }
 
@@ -338,11 +459,11 @@
             const now = new Date();
             const diff = Math.floor((now - date) / 1000);
 
-            if (diff < 60) return 'الآن';
-            if (diff < 3600) return Math.floor(diff / 60) + ' دقيقة';
-            if (diff < 86400) return Math.floor(diff / 3600) + ' ساعة';
-            if (diff < 2592000) return Math.floor(diff / 86400) + ' يوم';
-            return date.toLocaleDateString('ar-SA');
+            if (diff < 60) return 'ئێستا';
+            if (diff < 3600) return Math.floor(diff / 60) + ' خولەک';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' کاتژمێر';
+            if (diff < 2592000) return Math.floor(diff / 86400) + ' ڕۆژ';
+            return date.toLocaleDateString('ckb');
         }
 
         document.getElementById('loginForm').addEventListener('submit', loginWithEmail);
@@ -350,66 +471,66 @@
     </script>
 
     <script>
-        // Videos Database
+        // Videos Database - تەنها بە لینکی streamtape بۆ بینین
         const videos = [
             {
                 id: 1,
-                title: "فيديو اجنبية",
+                title: "ڤیدیۆی بیانی",
                 thumbnail: "https://via.placeholder.com/400x300/F59E0B/1E293B?text=Python+Course",
                 duration: "15:30",
                 views: "1.2K",
                 uploadDate: "2024-02-01",
-                description: "دورة شاملة لتعلم لغة Python من الأساسيات حتى الاحتراف. في هذا الفيديو سنتعلم الأساسيات والمفاهيم المهمة في البرمجة.",
-                streamtapeUrl: " https://streamtape.com/e/elB498DqQkCYR9A/"
+                description: "دورەی تەواوی فێربوونی Python لە بنەڕەتەکانەوە تا پێشکەوتوو. لەم ڤیدیۆیەدا بنەڕەت و چەمکە گرنگەکانی پرۆگرامسازی فێردەبیت.",
+                streamtapeUrl: "https://streamtape.com/e/elB498DqQkCYR9A/" // تەنها بۆ بینین
             },
             {
                 id: 2,
-                title: "فيديو اجنبية ٢",
+                title: "ڤیدیۆی بیانی ٢",
                 thumbnail: "https://via.placeholder.com/400x300/10B981/1E293B?text=Web+Design",
                 duration: "22:45",
                 views: "2.5K",
                 uploadDate: "2024-02-03",
-                description: "تعلم كيفية تصميم موقع ويب احترافي باستخدام HTML و CSS. مناسب للمبتدئين والمحترفين.",
+                description: "فێربە چۆن وێبسایتێکی پیشەگەرانە دیزاین بکەیت بە بەکارهێنانی HTML و CSS. گونجاوە بۆ هەردوو ئاستی سەرەتایی و پێشکەوتوو.",
                 streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
             },
             {
                 id: 3,
-                title: "فيديو اجنبية ٣",
+                title: "ڤیدیۆی بیانی ٣",
                 thumbnail: "https://via.placeholder.com/400x300/6366F1/1E293B?text=React+JS",
                 duration: "18:20",
                 views: "3.1K",
                 uploadDate: "2024-02-05",
-                description: "دورة كاملة لتعلم React.js من الصفر. تعلم كيفية بناء تطبيقات ويب تفاعلية.",
+                description: "دورەی تەواوی فێربوونی React.js لە سەرەتاوە. فێربە چۆن ئەپلیکەیشنی وێبی کارلێککار دروست بکەیت.",
                 streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
             },
             {
                 id: 4,
-                title: "فيديو اجنبية ٤",
+                title: "ڤیدیۆی بیانی ٤",
                 thumbnail: "https://via.placeholder.com/400x300/F59E0B/1E293B?text=JavaScript",
                 duration: "25:10",
                 views: "4.3K",
                 uploadDate: "2024-01-28",
-                description: "كل ما تحتاج معرفته عن JavaScript. مناسب لجميع المستويات.",
+                description: "هەموو ئەو شتانەی پێویستە بزانی دەربارەی JavaScript. گونجاوە بۆ هەموو ئاستەکان.",
                 streamtapeUrl: "https://streamtape.com/e/VIDEO_ID_HERE"
             },
             {
                 id: 5,
-                title: "فيديو عربية",
+                title: "ڤیدیۆی عەرەبی",
                 thumbnail: "https://via.placeholder.com/400x300/8B5CF6/1E293B?text=Node.js",
                 duration: "30:15",
                 views: "1.8K",
                 uploadDate: "2024-02-04",
-                description: "تعلم بناء Backend قوي باستخدام Node.js و Express. من إنشاء API إلى التعامل مع قواعد البيانات.",
+                description: "فێربنی بەکێندی بەهێز لە ڕێگەی Node.js و Express. لە دروستکردنی API تا کارکردن لەگەڵ بنکەدراوەکان.",
                 streamtapeUrl: "https://streamtape.com/e/0813Vmav33sb1wV/"
             },
             {
                 id: 6,
-                title: " فيديو عربية ٢",
+                title: "ڤیدیۆی عەرەبی ٢",
                 thumbnail: "https://via.placeholder.com/400x300/10B981/1E293B?text=MongoDB",
                 duration: "20:40",
                 views: "2.2K",
                 uploadDate: "2024-01-30",
-                description: "تعلم العمل مع MongoDB، قاعدة البيانات NoSQL. من التثبيت إلى العمليات المتقدمة.",
+                description: "فێربنی کارکردن لەگەڵ MongoDB، بنکەدراوەی NoSQL. لە دامەزراندن تا کارپێکردنی پێشکەوتوو.",
                 streamtapeUrl: "https://streamtape.com/e/7KXDLVXbPLiAOVY/"
             }
         ];
@@ -447,15 +568,15 @@
                     </div>
                     <div class="video-info">
                         <h3 class="video-title">${video.title}</h3>
-                        <div class="video-meta">
-                            <div class="meta-item">
+                        <div class="video-stats">
+                            <span class="stat-badge">
                                 <span>👁️</span>
                                 <span>${video.views}</span>
-                            </div>
-                            <div class="meta-item">
+                            </span>
+                            <span class="stat-badge">
                                 <span>📅</span>
                                 <span>${formatUploadDate(video.uploadDate)}</span>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -470,6 +591,7 @@
             const player = document.getElementById('videoPlayer');
             const details = document.getElementById('videoDetailsContent');
 
+            // بەکارهێنانی iframe بە شێوازی جوان بۆ نیشاندانی ڤیدیۆکە
             player.innerHTML = `
                 <iframe 
                     src="${video.streamtapeUrl}" 
@@ -485,17 +607,17 @@
                     <textarea 
                         class="comment-textarea" 
                         id="commentText" 
-                        placeholder="اكتب تعليقك هنا..."
+                        placeholder="بۆچوونەکەت لێرە بنووسە..."
                     ></textarea>
                     <button class="comment-submit" onclick="addComment(${video.id})">
-                        إضافة تعليق
+                        زیادکردنی بۆچوون
                     </button>
                 </div>
             ` : `
                 <div class="login-required">
-                    <p>يجب تسجيل الدخول لإضافة تعليق</p>
+                    <p>پێویستە بچیتە ژوورەوە بۆ زیادکردنی بۆچوون</p>
                     <button class="btn btn-primary" onclick="openAuthModal('login')">
-                        تسجيل الدخول
+                        چوونەژوورەوە
                     </button>
                 </div>
             `;
@@ -506,7 +628,7 @@
                     <div class="detail-stats">
                         <div class="stat-item">
                             <span class="stat-icon">👁️</span>
-                            <span>${video.views} مشاهدة</span>
+                            <span>${video.views} بینین</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-icon">📅</span>
@@ -525,7 +647,7 @@
 
                 <div class="comments-section">
                     <div class="comments-header">
-                        <h3 class="comments-title">التعليقات</h3>
+                        <h3 class="comments-title">بۆچوونەکان</h3>
                         <span class="comments-count" id="commentsCount">0</span>
                     </div>
                     
@@ -555,11 +677,11 @@
             const now = new Date();
             const diff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
 
-            if (diff === 0) return 'اليوم';
-            if (diff === 1) return 'أمس';
-            if (diff < 7) return 'منذ ' + diff + ' يوم';
-            if (diff < 30) return 'منذ ' + Math.floor(diff / 7) + ' أسبوع';
-            return 'منذ ' + Math.floor(diff / 30) + ' شهر';
+            if (diff === 0) return 'ئەمڕۆ';
+            if (diff === 1) return 'دوێنێ';
+            if (diff < 7) return 'لە ' + diff + ' ڕۆژ';
+            if (diff < 30) return 'لە ' + Math.floor(diff / 7) + ' هەفتە';
+            return 'لە ' + Math.floor(diff / 30) + ' مانگ';
         }
 
         function openAuthModal(tab) {
