@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ڤیدیۆ پرۆ - پلاتفۆرمی ڤیدیۆیی</title>
-    <!-- فۆنتەکان -->
+    <title>فيديو برو - منصة الفيديو الاحترافية</title>
+    <!-- الخطوط -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <!-- فایل ستایل -->
+    <!-- ملف التنسيقات -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- سەردێڵ -->
+    <!-- الهيدر -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">
                     <i class="icon">▶️</i>
-                    <span>ڤیدیۆ پرۆ</span>
+                    <span>فيديو برو</span>
                 </div>
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="گەڕان بۆ ڤیدیۆ...">
+                    <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
                     <span class="search-icon">🔍</span>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- ناوەڕۆکی سەرەکی -->
+    <!-- المحتوى الرئيسي -->
     <main>
         <div class="container">
-            <!-- سەردێڕی پەڕە -->
+            <!-- عنوان الصفحة -->
             <div class="page-header">
-                <h1>کتێبخانەی ڤیدیۆ</h1>
-                <p>گەڕان لە نێوان ڤیدیۆی کوالێتی بەرزدا</p>
+                <h1>مكتبة الفيديو</h1>
+                <p>استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
             </div>
 
-            <!-- ڕیزکردنی کارتەکان -->
+            <!-- شبكة البطاقات -->
             <div class="videos-grid" id="videosGrid"></div>
             <div class="no-results hidden" id="noResults">
-                <p>هیچ ڤیدیۆیەک نەدۆزرایەوە</p>
+                <p>لا توجد نتائج للبحث</p>
             </div>
         </div>
     </main>
 
-    <!-- مۆدالی ڤیدیۆ -->
+    <!-- مودال الفيديو -->
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
@@ -54,53 +54,53 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- جافاسكريبت -->
     <script>
-        // داتای ڤیدیۆکان
+        // بيانات الفيديوهات
         const videos = [
             {
                 id: 1,
-                title: 'فێربنی Python - دەستپێک',
+                title: 'تعلم Python - للمبتدئين',
                 thumbnail: 'https://picsum.photos/400/250?random=1',
                 duration: '15:30',
-                views: '١٫٢هەزار',
-                uploaded: '٢ ڕۆژ لەمەوپێش',
-                description: 'لەم ڤیدیۆیەدا فێری بنەڕەتەکانی Python دەبیت. بە شێوازێکی ئاسان و ڕوون.',
+                views: '١٫٢ ألف',
+                uploaded: 'منذ يومين',
+                description: 'في هذا الفيديو ستتعلم أساسيات لغة Python بطريقة سهلة ومبسطة.',
                 videoUrl: 'https://streamtape.com/e/elB498DqQkCYR9A/'
             },
             {
                 id: 2,
-                title: 'دیزاینی وێب - HTML و CSS',
+                title: 'تصميم مواقع - HTML و CSS',
                 thumbnail: 'https://picsum.photos/400/250?random=2',
                 duration: '22:45',
-                views: '٣٫٥هەزار',
-                uploaded: '٥ ڕۆژ لەمەوپێش',
-                description: 'فێربن چۆن وێبسایتێکی جوان دروست بکەن بە HTML و CSS.',
+                views: '٣٫٥ ألف',
+                uploaded: 'منذ ٥ أيام',
+                description: 'تعلم كيفية تصميم موقع ويب احترافي باستخدام HTML و CSS.',
                 videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
             },
             {
                 id: 3,
-                title: 'جاڤاسکریپت بۆ سەرەتاییان',
+                title: 'جافاسكريبت للمبتدئين',
                 thumbnail: 'https://picsum.photos/400/250?random=3',
                 duration: '18:20',
-                views: '٢٫١هەزار',
-                uploaded: '١ هەفتە لەمەوپێش',
-                description: 'بنەڕەتەکانی جاڤاسکریپت فێربن و دەست بکەن بە نووسینی کۆدی کارا.',
+                views: '٢٫١ ألف',
+                uploaded: 'منذ أسبوع',
+                description: 'أساسيات جافاسكريبت وكيفية كتابة كود تفاعلي لمواقع الويب.',
                 videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
             },
             {
                 id: 4,
-                title: 'React.js - کورسی خێرا',
+                title: 'React.js - دورة سريعة',
                 thumbnail: 'https://picsum.photos/400/250?random=4',
                 duration: '25:10',
-                views: '٤هەزار',
-                uploaded: '٣ ڕۆژ لەمەوپێش',
-                description: 'فێربنی React.js لە ڕێگەی پڕۆژەی کرداری.',
+                views: '٤ آلاف',
+                uploaded: 'منذ ٣ أيام',
+                description: 'تعلم React.js من خلال مشاريع عملية خطوة بخطوة.',
                 videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
             }
         ];
 
-        // پێشاندانی ڤیدیۆکان
+        // عرض الفيديوهات
         function displayVideos() {
             const grid = document.getElementById('videosGrid');
             const noResults = document.getElementById('noResults');
@@ -130,7 +130,7 @@
                 </div>
             `).join('');
 
-            // زیادکردنی کلیک لەسەر کارتەکان
+            // إضافة حدث النقر على البطاقات
             document.querySelectorAll('.video-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
@@ -140,7 +140,7 @@
             });
         }
 
-        // کردنەوەی مۆدال
+        // فتح المودال
         function openModal(video) {
             const modal = document.getElementById('videoModal');
             const wrapper = document.getElementById('videoWrapper');
@@ -163,7 +163,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // داخستنی مۆدال
+        // إغلاق المودال
         function closeModal() {
             const modal = document.getElementById('videoModal');
             modal.classList.remove('show');
@@ -171,7 +171,7 @@
             document.getElementById('videoWrapper').innerHTML = '';
         }
 
-        // گەڕان
+        // البحث
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const term = e.target.value.trim().toLowerCase();
             if (!term) {
@@ -214,13 +214,13 @@
             }
         });
 
-        // داخستن بە کلیک لەسەر ئێکس یان دەرەوەی مۆدال
+        // إغلاق عند النقر على X أو خارج المودال
         document.getElementById('closeModal').addEventListener('click', closeModal);
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) closeModal();
         });
 
-        // دەستپێکردن
+        // بدء التشغيل
         displayVideos();
     </script>
 </body>
