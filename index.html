@@ -3,212 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="siteTitle">ڤیدیۆ پرۆ - پلاتفۆرمی ڤیدیۆی پیشەگەرانە</title>
-    
-    <!-- Google Fonts -->
+    <title>ڤیدیۆ پرۆ - پلاتفۆرمی ڤیدیۆیی</title>
+    <!-- فۆنتەکان -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- فایل ستایل -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="ckb">
-            <span class="lang-flag">🇰🇼</span>
-            <span class="lang-name">کوردی</span>
-        </button>
-        <button class="lang-btn" data-lang="ar">
-            <span class="lang-flag">🇸🇦</span>
-            <span class="lang-name">العربية</span>
-        </button>
-        <button class="lang-btn" data-lang="en">
-            <span class="lang-flag">🇬🇧</span>
-            <span class="lang-name">English</span>
-        </button>
-        <button class="lang-btn" data-lang="tr">
-            <span class="lang-flag">🇹🇷</span>
-            <span class="lang-name">Türkçe</span>
-        </button>
-        <button class="lang-btn" data-lang="fa">
-            <span class="lang-flag">🇮🇷</span>
-            <span class="lang-name">فارسی</span>
-        </button>
-    </div>
-
-    <!-- Header -->
+    <!-- سەردێڵ -->
     <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-play-circle logo-icon"></i>
-                <span data-i18n="logo">ڤیدیۆ پرۆ</span>
-            </div>
-
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" data-i18n="searchPlaceholder" placeholder="گەڕان بۆ ڤیدیۆ...">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-
-            <div class="nav-actions">
-                <div class="hidden" id="authButtons">
-                    <button class="btn btn-outline" onclick="openAuthModal('login')"><i class="fas fa-sign-in-alt"></i> <span data-i18n="login">چوونەژوورەوە</span></button>
-                    <button class="btn btn-primary" onclick="openAuthModal('register')"><i class="fas fa-user-plus"></i> <span data-i18n="register">دروستکردنی هەژمار</span></button>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="icon">▶️</i>
+                    <span>ڤیدیۆ پرۆ</span>
                 </div>
-                
-                <div class="user-wrapper hidden" id="userWrapper">
-                    <img src="https://via.placeholder.com/100" alt="User" class="user-avatar" id="userAvatar">
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item" onclick="showProfile()">
-                            <i class="fas fa-user"></i>
-                            <span data-i18n="profile">پڕۆفایل</span>
-                        </a>
-                        <a href="#" class="dropdown-item" onclick="showVideos()">
-                            <i class="fas fa-video"></i>
-                            <span data-i18n="videos">ڤیدیۆکان</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item" onclick="logout()">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span data-i18n="logout">چوونەدەرەوە</span>
-                        </a>
-                    </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="گەڕان بۆ ڤیدیۆ...">
+                    <span class="search-icon">🔍</span>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container" id="mainContent">
-        <div class="page-header" data-aos="fade-down">
-            <h1 class="page-title" data-i18n="pageTitle">کتێبخانەی ڤیدیۆ</h1>
-            <p class="page-subtitle" data-i18n="pageSubtitle">گەڕان لە نێوان ڤیدیۆی جۆراوجۆری کوالێتی بەرزدا</p>
-        </div>
-
-        <!-- Filter Panel -->
-        <div class="filter-panel" data-aos="fade-up">
-            <button class="filter-btn active" data-filter="all"><i class="fas fa-th-large"></i> <span data-i18n="all">هەموو</span></button>
-            <button class="filter-btn" data-filter="new"><i class="fas fa-clock"></i> <span data-i18n="newest">نوێترین</span></button>
-            <button class="filter-btn" data-filter="popular"><i class="fas fa-fire"></i> <span data-i18n="popular">بەناوبانگ</span></button>
-            <button class="filter-btn" data-filter="arabic"><i class="fas fa-language"></i> <span data-i18n="arabic">عەرەبی</span></button>
-            <button class="filter-btn" data-filter="foreign"><i class="fas fa-globe"></i> <span data-i18n="foreign">بیانی</span></button>
-            <button class="filter-btn" data-filter="kurdish"><i class="fas fa-flag"></i> <span data-i18n="kurdish">کوردی</span></button>
-        </div>
-
-        <div class="videos-grid" id="videosGrid"></div>
-        
-        <div class="no-results hidden" id="noResults" data-aos="zoom-in">
-            <i class="fas fa-search"></i>
-            <p data-i18n="noResults">هیچ ڤیدیۆیەک نەدۆزرایەوە</p>
-        </div>
-    </div>
-
-    <!-- Profile Page -->
-    <div class="profile-container hidden" id="profilePage">
-        <div class="profile-banner" data-aos="zoom-in">
-            <img src="https://via.placeholder.com/120" alt="Profile" class="profile-avatar-large" id="profileAvatarLarge">
-            <h1 class="profile-name" id="profileName">ناوی بەکارهێنەر</h1>
-            <p class="profile-email" id="profileEmail">user@example.com</p>
-        </div>
-
-        <div class="profile-stats">
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-value" id="totalWatched">0</div>
-                <div class="stat-label" data-i18n="videosWatched">ڤیدیۆی بینراو</div>
+    <!-- ناوەڕۆکی سەرەکی -->
+    <main>
+        <div class="container">
+            <!-- سەردێڕی پەڕە -->
+            <div class="page-header">
+                <h1>کتێبخانەی ڤیدیۆ</h1>
+                <p>گەڕان لە نێوان ڤیدیۆی کوالێتی بەرزدا</p>
             </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-value" id="totalComments">0</div>
-                <div class="stat-label" data-i18n="comments">بۆچوونەکان</div>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="stat-value" id="joinedDays">0</div>
-                <div class="stat-label" data-i18n="daysOnPlatform">ڕۆژ لە پلاتفۆرمدا</div>
+
+            <!-- ڕیزکردنی کارتەکان -->
+            <div class="videos-grid" id="videosGrid"></div>
+            <div class="no-results hidden" id="noResults">
+                <p>هیچ ڤیدیۆیەک نەدۆزرایەوە</p>
             </div>
         </div>
+    </main>
 
-        <button class="btn btn-primary" onclick="showVideos()" style="margin: 0 auto; display: block; padding: 15px 40px;" data-aos="fade-up" data-aos-delay="400">
-            <i class="fas fa-arrow-right"></i> <span data-i18n="backToVideos">گەڕانەوە بۆ ڤیدیۆکان</span>
-        </button>
-    </div>
-
-    <!-- Video Modal -->
-    <div class="video-modal" id="videoModal">
-        <span class="close-modal" onclick="closeVideoModal()"><i class="fas fa-times"></i></span>
+    <!-- مۆدالی ڤیدیۆ -->
+    <div class="modal" id="videoModal">
         <div class="modal-content">
-            <div class="video-player" id="videoPlayer"></div>
-            <div class="video-details" id="videoDetailsContent"></div>
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="video-wrapper" id="videoWrapper"></div>
+            <div class="video-info" id="videoInfo"></div>
         </div>
     </div>
 
-    <!-- Auth Modal -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-box">
-            <span class="close-modal" onclick="closeAuthModal()"><i class="fas fa-times"></i></span>
+    <!-- JavaScript -->
+    <script>
+        // داتای ڤیدیۆکان
+        const videos = [
+            {
+                id: 1,
+                title: 'فێربنی Python - دەستپێک',
+                thumbnail: 'https://picsum.photos/400/250?random=1',
+                duration: '15:30',
+                views: '١٫٢هەزار',
+                uploaded: '٢ ڕۆژ لەمەوپێش',
+                description: 'لەم ڤیدیۆیەدا فێری بنەڕەتەکانی Python دەبیت. بە شێوازێکی ئاسان و ڕوون.',
+                videoUrl: 'https://streamtape.com/e/elB498DqQkCYR9A/'
+            },
+            {
+                id: 2,
+                title: 'دیزاینی وێب - HTML و CSS',
+                thumbnail: 'https://picsum.photos/400/250?random=2',
+                duration: '22:45',
+                views: '٣٫٥هەزار',
+                uploaded: '٥ ڕۆژ لەمەوپێش',
+                description: 'فێربن چۆن وێبسایتێکی جوان دروست بکەن بە HTML و CSS.',
+                videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
+            },
+            {
+                id: 3,
+                title: 'جاڤاسکریپت بۆ سەرەتاییان',
+                thumbnail: 'https://picsum.photos/400/250?random=3',
+                duration: '18:20',
+                views: '٢٫١هەزار',
+                uploaded: '١ هەفتە لەمەوپێش',
+                description: 'بنەڕەتەکانی جاڤاسکریپت فێربن و دەست بکەن بە نووسینی کۆدی کارا.',
+                videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
+            },
+            {
+                id: 4,
+                title: 'React.js - کورسی خێرا',
+                thumbnail: 'https://picsum.photos/400/250?random=4',
+                duration: '25:10',
+                views: '٤هەزار',
+                uploaded: '٣ ڕۆژ لەمەوپێش',
+                description: 'فێربنی React.js لە ڕێگەی پڕۆژەی کرداری.',
+                videoUrl: 'https://streamtape.com/e/VIDEO_ID_HERE'
+            }
+        ];
+
+        // پێشاندانی ڤیدیۆکان
+        function displayVideos() {
+            const grid = document.getElementById('videosGrid');
+            const noResults = document.getElementById('noResults');
             
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login"><span data-i18n="login">چوونەژوورەوە</span></button>
-                <button class="auth-tab" data-tab="register"><span data-i18n="register">دروستکردنی هەژمار</span></button>
-            </div>
+            if (!videos.length) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
 
-            <!-- Login Form -->
-            <form class="auth-form active" id="loginForm">
-                <button type="button" class="google-btn" onclick="loginWithGoogle()">
-                    <i class="fab fa-google"></i>
-                    <span data-i18n="loginWithGoogle">چوونەژوورەوە لە ڕێگەی Google</span>
-                </button>
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
 
-                <div class="divider"><span data-i18n="or">یان</span></div>
-
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">ئیمەیڵ</label>
-                    <input type="email" class="form-input" id="loginEmail" required>
+            grid.innerHTML = videos.map(video => `
+                <div class="video-card" data-id="${video.id}">
+                    <div class="thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <span class="duration">${video.duration}</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="video-title">${video.title}</h3>
+                        <div class="meta">
+                            <span>👁️ ${video.views}</span>
+                            <span>📅 ${video.uploaded}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">وشەی نهێنی</label>
-                    <input type="password" class="form-input" id="loginPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-sign-in-alt"></i> <span data-i18n="login">چوونەژوورەوە</span></button>
-            </form>
+            `).join('');
 
-            <!-- Register Form -->
-            <form class="auth-form" id="registerForm">
-                <button type="button" class="google-btn" onclick="loginWithGoogle()">
-                    <i class="fab fa-google"></i>
-                    <span data-i18n="registerWithGoogle">تۆمارکردن لە ڕێگەی Google</span>
-                </button>
+            // زیادکردنی کلیک لەسەر کارتەکان
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const id = card.dataset.id;
+                    const video = videos.find(v => v.id == id);
+                    if (video) openModal(video);
+                });
+            });
+        }
 
-                <div class="divider"><span data-i18n="or">یان</span></div>
+        // کردنەوەی مۆدال
+        function openModal(video) {
+            const modal = document.getElementById('videoModal');
+            const wrapper = document.getElementById('videoWrapper');
+            const info = document.getElementById('videoInfo');
 
-                <div class="form-group">
-                    <label class="form-label" data-i18n="name">ناو</label>
-                    <input type="text" class="form-input" id="registerName" required>
+            wrapper.innerHTML = `
+                <iframe src="${video.videoUrl}" allowfullscreen frameborder="0"></iframe>
+            `;
+            info.innerHTML = `
+                <h2>${video.title}</h2>
+                <div class="meta-details">
+                    <span>👁️ ${video.views}</span>
+                    <span>⏱️ ${video.duration}</span>
+                    <span>📅 ${video.uploaded}</span>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="email">ئیمەیڵ</label>
-                    <input type="email" class="form-input" id="registerEmail" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-i18n="password">وشەی نهێنی</label>
-                    <input type="password" class="form-input" id="registerPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-user-plus"></i> <span data-i18n="register">دروستکردنی هەژمار</span></button>
-            </form>
-        </div>
-    </div>
+                <p class="description">${video.description}</p>
+            `;
 
-    <!-- Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="language.js"></script>
-    <script src="main.js"></script>
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // داخستنی مۆدال
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            document.getElementById('videoWrapper').innerHTML = '';
+        }
+
+        // گەڕان
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const term = e.target.value.trim().toLowerCase();
+            if (!term) {
+                displayVideos();
+                return;
+            }
+            const filtered = videos.filter(v => v.title.includes(term) || v.description.includes(term));
+            const grid = document.getElementById('videosGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+            } else {
+                grid.classList.remove('hidden');
+                noResults.classList.add('hidden');
+                grid.innerHTML = filtered.map(video => `
+                    <div class="video-card" data-id="${video.id}">
+                        <div class="thumbnail">
+                            <img src="${video.thumbnail}" alt="${video.title}">
+                            <span class="duration">${video.duration}</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="video-title">${video.title}</h3>
+                            <div class="meta">
+                                <span>👁️ ${video.views}</span>
+                                <span>📅 ${video.uploaded}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.querySelectorAll('.video-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const id = card.dataset.id;
+                        const video = filtered.find(v => v.id == id);
+                        if (video) openModal(video);
+                    });
+                });
+            }
+        });
+
+        // داخستن بە کلیک لەسەر ئێکس یان دەرەوەی مۆدال
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) closeModal();
+        });
+
+        // دەستپێکردن
+        displayVideos();
+    </script>
 </body>
 </html>
