@@ -10,6 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- ملف التنسيقات -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- MyBidAds Script -->
+    <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
+    
+    <!-- Adsterra Script -->
+    <script async src="//adsterra.com/smaill.js"></script>
+    
+    <!-- PropellerAds Script -->
+    <script async src="https://cdn.propellerads.com/js/pa.js"></script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
 </head>
 <body>
     <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
@@ -29,7 +41,9 @@
         </div>
     </header>
     
-<div data-banner-id="2017789"></div>
+    <div class="ad-container ad-top">
+        <div data-banner-id="2017789"></div>
+    </div>
 
     <!-- المحتوى الرئيسي -->
     <main>
@@ -48,17 +62,32 @@
         </div>
     </main>
 
+    <div class="ad-container ad-between">
+        <div data-banner-id="2017790"></div>
+    </div>
+
     <!-- مودال الفيديو -->
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
+            
+            <div class="ad-container ad-modal-top">
+                <div data-banner-id="2017791"></div>
+            </div>
+            
             <div class="video-wrapper" id="videoWrapper"></div>
             <div class="video-info" id="videoInfo"></div>
+            
+            <div class="ad-container ad-modal-bottom">
+                <div data-banner-id="2017794"></div>
+            </div>
         </div>
     </div>
 
-<div data-banner-id="2017790"></div>
-<div data-banner-id="2017794"></div>
+    <div class="ad-container ad-bottom">
+        <div data-banner-id="2017795"></div>
+    </div>
+
     <!-- جافاسكريبت -->
     <script>
         // بيانات الفيديوهات
@@ -143,7 +172,6 @@
                 description: 'س*كس و افلام اجنبية',
                 videoUrl: 'https://streamtape.com/e/7KXDLVXbPLiAOVY/'
             }
-            
         ];
 
         // عرض الفيديوهات
@@ -160,26 +188,30 @@
             grid.classList.remove('hidden');
             noResults.classList.add('hidden');
 
-            grid.innerHTML = videos.map(video => `
-                <div class="video-card" data-id="${video.id}">
-                    <div class="thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <span class="duration">${video.duration}</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="video-title">${video.title}</h3>
-                        <div class="meta">
-                            <span>👁️ ${video.views}</span>
-                            <span>📅 ${video.uploaded}</span>
+            grid.innerHTML = videos.map((video, index) => {
+                let adPlacement = '';
+                if ((index + 1) % 4 === 0) {
+                    adPlacement = '<div class="ad-container ad-grid-between"><div data-banner-id="2017792"></div></div>';
+                }
+                
+                return `
+                    <div class="video-card" data-id="${video.id}">
+                        <div class="thumbnail">
+                            <img src="${video.thumbnail}" alt="${video.title}">
+                            <span class="duration">${video.duration}</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="video-title">${video.title}</h3>
+                            <div class="meta">
+                                <span>👁️ ${video.views}</span>
+                                <span>📅 ${video.uploaded}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-     <div data-banner-id="2017791"></div>
-                
-            `).join('');
+                    ${adPlacement}
+                `;
+            }).join('');
 
-            // إضافة حدث النقر على البطاقات
             document.querySelectorAll('.video-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.dataset.id;
@@ -187,17 +219,28 @@
                     if (video) openModal(video);
                 });
             });
+
+            refreshAds();
         }
 
-        // فتح المودال
+        // فتح المودال مع Streamtape
         function openModal(video) {
             const modal = document.getElementById('videoModal');
             const wrapper = document.getElementById('videoWrapper');
             const info = document.getElementById('videoInfo');
 
             wrapper.innerHTML = `
-                <iframe src="${video.videoUrl}" allowfullscreen frameborder="0"></iframe>
+                <div class="streamtape-container">
+                    <iframe 
+                        src="${video.videoUrl}" 
+                        allowfullscreen 
+                        allow="autoplay; fullscreen"
+                        frameborder="0"
+                        scrolling="no">
+                    </iframe>
+                </div>
             `;
+
             info.innerHTML = `
                 <h2>${video.title}</h2>
                 <div class="meta-details">
@@ -210,6 +253,10 @@
 
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                refreshAds();
+            }, 500);
         }
 
         // إغلاق المودال
@@ -218,6 +265,35 @@
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
             document.getElementById('videoWrapper').innerHTML = '';
+        }
+
+        // Refresh ad networks
+        function refreshAds() {
+            try {
+                if (typeof window.stbVolume !== 'undefined') {
+                    window.stbVolume.refresh();
+                }
+            } catch (e) {
+                console.log('Adsterra refresh:', e);
+            }
+
+            try {
+                if (window.myBidAdsQueue) {
+                    window.myBidAdsQueue.push(function() {
+                        window.myBidAds && window.myBidAds.refresh();
+                    });
+                }
+            } catch (e) {
+                console.log('MyBidAds refresh:', e);
+            }
+
+            try {
+                if (window._paq) {
+                    window._paq.push(['trackPageView']);
+                }
+            } catch (e) {
+                console.log('PropellerAds refresh:', e);
+            }
         }
 
         // البحث
@@ -260,6 +336,8 @@
                         if (video) openModal(video);
                     });
                 });
+
+                refreshAds();
             }
         });
 
