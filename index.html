@@ -1,354 +1,348 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فيديو برو - منصة الفيديو الاحترافية</title>
-    <!-- الخطوط -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <!-- ملف التنسيقات -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- MyBidAds Script -->
-    <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
-    
-    <!-- Adsterra Script -->
-    <script async src="//adsterra.com/smaill.js"></script>
-    
-    <!-- PropellerAds Script -->
-    <script async src="https://cdn.propellerads.com/js/pa.js"></script>
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
+
+```
+<!-- MyBidAds Script -->
+<script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
+<!-- Adsterra Script -->
+<script async src="//adsterra.com/smaill.js"></script>
+<!-- PropellerAds Script -->
+<script async src="https://cdn.propellerads.com/js/pa.js"></script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
+```
+
 </head>
 <body>
-    <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
-    <!-- الهيدر -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <i class="icon">▶️</i>
-                    <span>فيديو برو</span>
-                </div>
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
-                    <span class="search-icon">🔍</span>
-                </div>
-            </nav>
-        </div>
-    </header>
-    
-    <div class="ad-container ad-top">
-        <div data-banner-id="2017789"></div>
+
+```
+<!-- Floating Particles -->
+<div id="particles"></div>
+
+<script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
+
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <i class="icon">▶️</i>
+                <span>فيديو برو</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
+                <span class="search-icon">🔍</span>
+            </div>
+        </nav>
     </div>
+</header>
 
-    <!-- المحتوى الرئيسي -->
-    <main>
-        <div class="container">
-            <!-- عنوان الصفحة -->
-            <div class="page-header">
-                <h1>مكتبة الفيديو</h1>
-                <p>استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
-            </div>
+<div class="ad-container ad-top">
+    <div data-banner-id="2017789"></div>
+</div>
 
-            <!-- شبكة البطاقات -->
-            <div class="videos-grid" id="videosGrid"></div>
-            <div class="no-results hidden" id="noResults">
-                <p>لا توجد نتائج للبحث</p>
-            </div>
+<!-- MAIN CONTENT -->
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>مكتبة الفيديو</h1>
+            <p>استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
         </div>
-    </main>
 
-    <div class="ad-container ad-between">
-        <div data-banner-id="2017790"></div>
-    </div>
-
-    <!-- مودال الفيديو -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            
-            <div class="ad-container ad-modal-top">
-                <div data-banner-id="2017791"></div>
-            </div>
-            
-            <div class="video-wrapper" id="videoWrapper"></div>
-            <div class="video-info" id="videoInfo"></div>
-            
-            <div class="ad-container ad-modal-bottom">
-                <div data-banner-id="2017794"></div>
-            </div>
+        <div class="videos-grid" id="videosGrid"></div>
+        <div class="no-results hidden" id="noResults">
+            <p>لا توجد نتائج للبحث</p>
         </div>
     </div>
+</main>
 
-    <div class="ad-container ad-bottom">
-        <div data-banner-id="2017795"></div>
+<div class="ad-container ad-between">
+    <div data-banner-id="2017790"></div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="videoModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+
+        <div class="ad-container ad-modal-top">
+            <div data-banner-id="2017791"></div>
+        </div>
+
+        <div class="video-wrapper" id="videoWrapper"></div>
+        <div class="video-info" id="videoInfo"></div>
+
+        <div class="ad-container ad-modal-bottom">
+            <div data-banner-id="2017794"></div>
+        </div>
     </div>
+</div>
 
-    <!-- جافاسكريبت -->
-    <script>
-        // بيانات الفيديوهات
-        const videos = [
-            {
-                id: 1,
-                title: 'فيديو اجنبية',
-                thumbnail: 'https://picsum.photos/400/250?random=1',
-                duration: '15:30',
-                views: '١٫٢ ألف',
-                uploaded: 'منذ يومين',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/elB498DqQkCYR9A/'
-            },
-            {
-                id: 2,
-                title: 'فيديو اجنبية',
-                thumbnail: 'https://picsum.photos/400/250?random=2',
-                duration: '22:45',
-                views: '٣٫٥ ألف',
-                uploaded: 'منذ ٥ أيام',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/kPMK6JxorxIrZk/'
-            },
-            {
-                id: 3,
-                title: ' فيديوو عربية',
-                thumbnail: 'https://picsum.photos/400/250?random=3',
-                duration: '18:20',
-                views: '٢٫١ ألف',
-                uploaded: 'منذ أسبوع',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/0813Vmav33sb1wV/'
-            },
-            {
-                id: 4,
-                title: 'فيديوو  عربية ',
-                thumbnail: 'https://picsum.photos/400/250?random=4',
-                duration: '25:10',
-                views: '٤ آلاف',
-                uploaded: 'منذ ٣ أيام',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/KzzBq276mDIJz7/'
-            },
-            {
-                id: 5,
-                title: 'فيديو اجنبية',
-                thumbnail: 'https://picsum.photos/400/250?random=1',
-                duration: '15:30',
-                views: '١٫٢ ألف',
-                uploaded: 'منذ يومين',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/v9LLkpxjO6C44Pw/'
-            },
-            {
-                id: 6,
-                title: 'فيديو اجنبية',
-                thumbnail: 'https://picsum.photos/400/250?random=2',
-                duration: '22:45',
-                views: '٣٫٥ ألف',
-                uploaded: 'منذ ٥ أيام',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/eP8waxpA9ATYWoR/'
-            },
-            {
-                id: 7,
-                title: ' فيديوو اجنبية',
-                thumbnail: 'https://picsum.photos/400/250?random=3',
-                duration: '18:20',
-                views: '٢٫١ ألف',
-                uploaded: 'منذ أسبوع',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/ZDwAXoZBB7Hqar2/'
-            },
-            {
-                id: 8,
-                title: 'فيديوو  عربية ',
-                thumbnail: 'https://picsum.photos/400/250?random=4',
-                duration: '25:10',
-                views: '٤ آلاف',
-                uploaded: 'منذ ٣ أيام',
-                description: 'س*كس و افلام اجنبية',
-                videoUrl: 'https://streamtape.com/e/7KXDLVXbPLiAOVY/'
+<div class="ad-container ad-bottom">
+    <div data-banner-id="2017795"></div>
+</div>
+
+<script>
+    // ============================
+    // PARTICLES BACKGROUND
+    // ============================
+    (function() {
+        const container = document.getElementById('particles');
+        const colors = ['#e63946', '#ff6b35', '#ffd60a'];
+        for (let i = 0; i < 18; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.cssText = `
+                position: fixed;
+                width: ${Math.random() * 3 + 1}px;
+                height: ${Math.random() * 3 + 1}px;
+                border-radius: 50%;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${Math.random() * 100}vw;
+                opacity: 0;
+                pointer-events: none;
+                z-index: 0;
+                animation: floatParticle ${Math.random() * 15 + 10}s linear ${Math.random() * 8}s infinite;
+            `;
+            container.appendChild(p);
+        }
+    })();
+
+    // ============================
+    // VIDEO DATA (unchanged)
+    // ============================
+    const videos = [
+        {
+            id: 1,
+            title: 'فيديو اجنبية',
+            thumbnail: 'https://picsum.photos/400/250?random=1',
+            duration: '15:30',
+            views: '١٫٢ ألف',
+            uploaded: 'منذ يومين',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/elB498DqQkCYR9A/'
+        },
+        {
+            id: 2,
+            title: 'فيديو اجنبية',
+            thumbnail: 'https://picsum.photos/400/250?random=2',
+            duration: '22:45',
+            views: '٣٫٥ ألف',
+            uploaded: 'منذ ٥ أيام',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/kPMK6JxorxIrZk/'
+        },
+        {
+            id: 3,
+            title: ' فيديوو عربية',
+            thumbnail: 'https://picsum.photos/400/250?random=3',
+            duration: '18:20',
+            views: '٢٫١ ألف',
+            uploaded: 'منذ أسبوع',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/0813Vmav33sb1wV/'
+        },
+        {
+            id: 4,
+            title: 'فيديوو  عربية ',
+            thumbnail: 'https://picsum.photos/400/250?random=4',
+            duration: '25:10',
+            views: '٤ آلاف',
+            uploaded: 'منذ ٣ أيام',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/KzzBq276mDIJz7/'
+        },
+        {
+            id: 5,
+            title: 'فيديو اجنبية',
+            thumbnail: 'https://picsum.photos/400/250?random=1',
+            duration: '15:30',
+            views: '١٫٢ ألف',
+            uploaded: 'منذ يومين',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/v9LLkpxjO6C44Pw/'
+        },
+        {
+            id: 6,
+            title: 'فيديو اجنبية',
+            thumbnail: 'https://picsum.photos/400/250?random=2',
+            duration: '22:45',
+            views: '٣٫٥ ألف',
+            uploaded: 'منذ ٥ أيام',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/eP8waxpA9ATYWoR/'
+        },
+        {
+            id: 7,
+            title: ' فيديوو اجنبية',
+            thumbnail: 'https://picsum.photos/400/250?random=3',
+            duration: '18:20',
+            views: '٢٫١ ألف',
+            uploaded: 'منذ أسبوع',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/ZDwAXoZBB7Hqar2/'
+        },
+        {
+            id: 8,
+            title: 'فيديوو  عربية ',
+            thumbnail: 'https://picsum.photos/400/250?random=4',
+            duration: '25:10',
+            views: '٤ آلاف',
+            uploaded: 'منذ ٣ أيام',
+            description: 'س*كس و افلام اجنبية',
+            videoUrl: 'https://streamtape.com/e/7KXDLVXbPLiAOVY/'
+        }
+    ];
+
+    // ============================
+    // DISPLAY VIDEOS
+    // ============================
+    function displayVideos(list) {
+        const grid = document.getElementById('videosGrid');
+        const noResults = document.getElementById('noResults');
+
+        if (!list || !list.length) {
+            grid.classList.add('hidden');
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        grid.classList.remove('hidden');
+        noResults.classList.add('hidden');
+
+        grid.innerHTML = list.map((video, index) => {
+            let adPlacement = '';
+            if ((index + 1) % 4 === 0) {
+                adPlacement = '<div class="ad-container ad-grid-between"><div data-banner-id="2017792"></div></div>';
             }
-        ];
-
-        // عرض الفيديوهات
-        function displayVideos() {
-            const grid = document.getElementById('videosGrid');
-            const noResults = document.getElementById('noResults');
-            
-            if (!videos.length) {
-                grid.classList.add('hidden');
-                noResults.classList.remove('hidden');
-                return;
-            }
-
-            grid.classList.remove('hidden');
-            noResults.classList.add('hidden');
-
-            grid.innerHTML = videos.map((video, index) => {
-                let adPlacement = '';
-                if ((index + 1) % 4 === 0) {
-                    adPlacement = '<div class="ad-container ad-grid-between"><div data-banner-id="2017792"></div></div>';
-                }
-                
-                return `
-                    <div class="video-card" data-id="${video.id}">
-                        <div class="thumbnail">
-                            <img src="${video.thumbnail}" alt="${video.title}">
-                            <span class="duration">${video.duration}</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="video-title">${video.title}</h3>
-                            <div class="meta">
-                                <span>👁️ ${video.views}</span>
-                                <span>📅 ${video.uploaded}</span>
-                            </div>
+            return `
+                <div class="video-card" data-id="${video.id}">
+                    <div class="thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                        <span class="duration">${video.duration}</span>
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="video-title">${video.title}</h3>
+                        <div class="meta">
+                            <span>👁️ ${video.views}</span>
+                            <span>📅 ${video.uploaded}</span>
                         </div>
                     </div>
-                    ${adPlacement}
-                `;
-            }).join('');
+                </div>
+                ${adPlacement}
+            `;
+        }).join('');
 
-            document.querySelectorAll('.video-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.dataset.id;
-                    const video = videos.find(v => v.id == id);
-                    if (video) openModal(video);
-                });
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const v = list.find(v => v.id == card.dataset.id);
+                if (v) openModal(v);
             });
-
-            refreshAds();
-        }
-
-        // فتح المودال مع Streamtape
-        function openModal(video) {
-            const modal = document.getElementById('videoModal');
-            const wrapper = document.getElementById('videoWrapper');
-            const info = document.getElementById('videoInfo');
-
-            wrapper.innerHTML = `
-                <div class="streamtape-container">
-                    <iframe 
-                        src="${video.videoUrl}" 
-                        allowfullscreen 
-                        allow="autoplay; fullscreen"
-                        frameborder="0"
-                        scrolling="no">
-                    </iframe>
-                </div>
-            `;
-
-            info.innerHTML = `
-                <h2>${video.title}</h2>
-                <div class="meta-details">
-                    <span>👁️ ${video.views}</span>
-                    <span>⏱️ ${video.duration}</span>
-                    <span>📅 ${video.uploaded}</span>
-                </div>
-                <p class="description">${video.description}</p>
-            `;
-
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-
-            setTimeout(() => {
-                refreshAds();
-            }, 500);
-        }
-
-        // إغلاق المودال
-        function closeModal() {
-            const modal = document.getElementById('videoModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-            document.getElementById('videoWrapper').innerHTML = '';
-        }
-
-        // Refresh ad networks
-        function refreshAds() {
-            try {
-                if (typeof window.stbVolume !== 'undefined') {
-                    window.stbVolume.refresh();
-                }
-            } catch (e) {
-                console.log('Adsterra refresh:', e);
-            }
-
-            try {
-                if (window.myBidAdsQueue) {
-                    window.myBidAdsQueue.push(function() {
-                        window.myBidAds && window.myBidAds.refresh();
-                    });
-                }
-            } catch (e) {
-                console.log('MyBidAds refresh:', e);
-            }
-
-            try {
-                if (window._paq) {
-                    window._paq.push(['trackPageView']);
-                }
-            } catch (e) {
-                console.log('PropellerAds refresh:', e);
-            }
-        }
-
-        // البحث
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const term = e.target.value.trim().toLowerCase();
-            if (!term) {
-                displayVideos();
-                return;
-            }
-            const filtered = videos.filter(v => v.title.includes(term) || v.description.includes(term));
-            const grid = document.getElementById('videosGrid');
-            const noResults = document.getElementById('noResults');
-            
-            if (filtered.length === 0) {
-                grid.classList.add('hidden');
-                noResults.classList.remove('hidden');
-            } else {
-                grid.classList.remove('hidden');
-                noResults.classList.add('hidden');
-                grid.innerHTML = filtered.map(video => `
-                    <div class="video-card" data-id="${video.id}">
-                        <div class="thumbnail">
-                            <img src="${video.thumbnail}" alt="${video.title}">
-                            <span class="duration">${video.duration}</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="video-title">${video.title}</h3>
-                            <div class="meta">
-                                <span>👁️ ${video.views}</span>
-                                <span>📅 ${video.uploaded}</span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-                
-                document.querySelectorAll('.video-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const id = card.dataset.id;
-                        const video = filtered.find(v => v.id == id);
-                        if (video) openModal(video);
-                    });
-                });
-
-                refreshAds();
-            }
         });
 
-        // إغلاق عند النقر على X أو خارج المودال
-        document.getElementById('closeModal').addEventListener('click', closeModal);
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) closeModal();
-        });
+        refreshAds();
+    }
 
-        // بدء التشغيل
-        displayVideos();
-    </script>
+    // ============================
+    // OPEN MODAL
+    // ============================
+    function openModal(video) {
+        const modal = document.getElementById('videoModal');
+        const wrapper = document.getElementById('videoWrapper');
+        const info = document.getElementById('videoInfo');
+
+        wrapper.innerHTML = `
+            <div class="streamtape-container">
+                <iframe 
+                    src="${video.videoUrl}" 
+                    allowfullscreen 
+                    allow="autoplay; fullscreen"
+                    frameborder="0"
+                    scrolling="no">
+                </iframe>
+            </div>
+        `;
+
+        info.innerHTML = `
+            <h2>${video.title}</h2>
+            <div class="meta-details">
+                <span>👁️ ${video.views}</span>
+                <span>⏱️ ${video.duration}</span>
+                <span>📅 ${video.uploaded}</span>
+            </div>
+            <p class="description">${video.description}</p>
+        `;
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => refreshAds(), 500);
+    }
+
+    // ============================
+    // CLOSE MODAL
+    // ============================
+    function closeModal() {
+        const modal = document.getElementById('videoModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        document.getElementById('videoWrapper').innerHTML = '';
+    }
+
+    // ============================
+    // REFRESH ADS
+    // ============================
+    function refreshAds() {
+        try { if (typeof window.stbVolume !== 'undefined') window.stbVolume.refresh(); } catch(e) {}
+        try { if (window.myBidAdsQueue) window.myBidAdsQueue.push(function() { window.myBidAds && window.myBidAds.refresh(); }); } catch(e) {}
+        try { if (window._paq) window._paq.push(['trackPageView']); } catch(e) {}
+    }
+
+    // ============================
+    // SEARCH
+    // ============================
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const term = e.target.value.trim().toLowerCase();
+        if (!term) { displayVideos(videos); return; }
+        const filtered = videos.filter(v => v.title.includes(term) || v.description.includes(term));
+        displayVideos(filtered);
+    });
+
+    // ============================
+    // CLOSE MODAL EVENTS
+    // ============================
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // ============================
+    // INIT
+    // ============================
+    displayVideos(videos);
+</script>
+
+<style>
+    @keyframes floatParticle {
+        0% { transform: translateY(100vh) scale(0); opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.2; }
+        100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+</style>
+```
+
 </body>
 </html>
