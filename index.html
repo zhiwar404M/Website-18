@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="style.css">
 
 ```
+<!-- Maintenance Mode -->
+<script src="maintenance.js"></script>
+
 <!-- MyBidAds Script -->
 <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
 <!-- Adsterra Script -->
@@ -342,6 +345,166 @@
         100% { transform: translateY(-10vh) scale(1); opacity: 0; }
     }
 </style>
+
+<!-- AD BLOCKER OVERLAY -->
+<div id="adBlockOverlay" style="display:none; position:fixed; inset:0; z-index:99998;
+    background:rgba(0,0,0,0.96); backdrop-filter:blur(16px);
+    align-items:center; justify-content:center; padding:20px; font-family:'Cairo',sans-serif; direction:rtl;">
+    <div style="
+        background:linear-gradient(135deg,#111520,#0d1117);
+        border:1px solid rgba(230,57,70,0.3);
+        border-radius:24px; padding:48px 36px;
+        max-width:460px; width:100%; text-align:center;
+        box-shadow:0 40px 80px rgba(0,0,0,0.9), 0 0 60px rgba(230,57,70,0.1);
+        position:relative; overflow:hidden;
+        animation: adbSlideIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+    ">
+        <!-- Top gradient bar -->
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;
+            background:linear-gradient(90deg,#e63946,#ff6b35,#ffd60a,#ff6b35,#e63946);
+            background-size:200% 100%;
+            animation:gradBar 3s linear infinite;"></div>
+
+        <!-- Icon -->
+        <div style="font-size:64px; margin-bottom:20px; animation: iconPulse 1.5s ease-in-out infinite;">🚫</div>
+
+        <!-- Title -->
+        <h2 style="font-size:26px; font-weight:900; margin-bottom:14px;
+            background:linear-gradient(135deg,#fff,#ff6b35,#e63946);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+            تم اكتشاف مانع إعلانات
+        </h2>
+
+        <!-- Message -->
+        <p style="color:#8892aa; font-size:15px; line-height:2; margin-bottom:28px;">
+            يبدو أنك تستخدم برنامج حجب الإعلانات.<br>
+            الإعلانات هي مصدر دعمنا الوحيد للاستمرار.<br>
+            <span style="color:#ff6b35; font-weight:700;">يرجى تعطيله لمشاهدة الفيديوهات.</span>
+        </p>
+
+        <!-- Steps -->
+        <div style="background:rgba(255,107,53,0.06); border:1px solid rgba(255,107,53,0.15);
+            border-radius:12px; padding:16px 20px; margin-bottom:24px; text-align:right;">
+            <p style="color:#f0f4ff; font-size:13px; line-height:2.2; margin:0;">
+                ١. افتح إعدادات المتصفح<br>
+                ٢. ابحث عن الإضافات (Extensions)<br>
+                ٣. عطّل مانع الإعلانات مؤقتاً<br>
+                ٤. أعد تحميل الصفحة 🔄
+            </p>
+        </div>
+
+        <!-- Button -->
+        <button onclick="recheckAdBlock()" style="
+            background:linear-gradient(135deg,#e63946,#ff6b35);
+            color:white; border:none; cursor:pointer;
+            padding:13px 32px; border-radius:50px;
+            font-family:'Cairo',sans-serif; font-size:15px; font-weight:700;
+            box-shadow:0 0 24px rgba(230,57,70,0.45);
+            transition:all 0.3s; width:100%;
+        "
+        onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 36px rgba(230,57,70,0.6)'"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 24px rgba(230,57,70,0.45)'"
+        >
+            ✅ لقد عطّلته — أعد التحقق
+        </button>
+    </div>
+    <style>
+        @keyframes adbSlideIn {
+            from { transform: scale(0.8) translateY(40px); opacity:0; }
+            to   { transform: scale(1) translateY(0);   opacity:1; }
+        }
+        @keyframes gradBar {
+            0%   { background-position: 0%   50%; }
+            100% { background-position: 200% 50%; }
+        }
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0px #e63946); }
+            50%      { transform: scale(1.12); filter: drop-shadow(0 0 14px #e63946); }
+        }
+    </style>
+</div>
+
+<!-- AD BLOCKER DETECTION SCRIPT -->
+<script>
+    // ============================
+    // AD BLOCKER DETECTION
+    // ============================
+
+    // A tiny bait element ad blockers typically hide
+    var baitAd = document.createElement('div');
+    baitAd.setAttribute('class', 'pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner');
+    baitAd.setAttribute('style', 'width:1px!important;height:1px!important;position:absolute!important;left:-9999px!important;top:-9999px!important;');
+    document.body.appendChild(baitAd);
+
+    function isAdBlockActive() {
+        // Method 1: bait element hidden or removed
+        if (!baitAd || baitAd.offsetParent === null || baitAd.offsetHeight === 0 ||
+            baitAd.offsetWidth === 0 || baitAd.clientHeight === 0 || baitAd.clientWidth === 0) {
+            return true;
+        }
+        // Method 2: computed style blocked
+        try {
+            var cs = window.getComputedStyle(baitAd);
+            if (cs && (cs.getPropertyValue('display') === 'none' ||
+                       cs.getPropertyValue('visibility') === 'hidden' ||
+                       cs.getPropertyValue('opacity') === '0')) {
+                return true;
+            }
+        } catch(e) {}
+        return false;
+    }
+
+    function showAdBlockWarning() {
+        var overlay = document.getElementById('adBlockOverlay');
+        overlay.style.display = 'flex';
+        // Block video grid from being shown
+        var grid = document.getElementById('videosGrid');
+        if (grid) grid.innerHTML = '';
+    }
+
+    function hideAdBlockWarning() {
+        var overlay = document.getElementById('adBlockOverlay');
+        overlay.style.display = 'none';
+    }
+
+    // Called when user clicks "I disabled it"
+    function recheckAdBlock() {
+        if (isAdBlockActive()) {
+            // Shake the card to indicate still detected
+            var card = document.querySelector('#adBlockOverlay > div');
+            if (card) {
+                card.style.animation = 'none';
+                card.style.border = '1px solid rgba(230,57,70,0.8)';
+                card.style.boxShadow = '0 0 40px rgba(230,57,70,0.4)';
+                setTimeout(() => {
+                    card.style.border = '1px solid rgba(230,57,70,0.3)';
+                    card.style.boxShadow = '0 40px 80px rgba(0,0,0,0.9), 0 0 60px rgba(230,57,70,0.1)';
+                }, 800);
+            }
+        } else {
+            hideAdBlockWarning();
+            displayVideos(videos);
+            refreshAds();
+        }
+    }
+
+    // Run check after a short delay (ads need time to load)
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            if (isAdBlockActive()) {
+                showAdBlockWarning();
+            }
+        }, 1200);
+    });
+
+    // Also periodically re-check (every 5 seconds) in case user disables mid-session
+    setInterval(function() {
+        var overlay = document.getElementById('adBlockOverlay');
+        if (overlay && overlay.style.display === 'none') {
+            if (isAdBlockActive()) showAdBlockWarning();
+        }
+    }, 5000);
+</script>
 ```
 
 </body>
