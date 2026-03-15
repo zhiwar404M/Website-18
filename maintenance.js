@@ -1,7 +1,7 @@
 // ============================
 // MAINTENANCE MODE SETTINGS
 // ============================
-const MAINTENANCE_MODE = false; // ← true بکە بۆ چالاككردن
+const MAINTENANCE_MODE = true; // ← true بکە بۆ چالاككردن
 
 // کاتی کۆتایی صیانە (ئەگەر نەتەوێت کاونتداون بێت null بکە)
 const MAINTENANCE_END = null; // نموونە: new Date(‘2025-06-20T18:00:00’)
