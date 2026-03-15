@@ -15,7 +15,6 @@ const CONTACT_LINK = ‘https://t.me/’;
 if (MAINTENANCE_MODE) {
 document.addEventListener(‘DOMContentLoaded’, function () {
 
-```
     document.head.insertAdjacentHTML('beforeend', `
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
         
@@ -37,52 +36,8 @@ document.addEventListener(‘DOMContentLoaded’, function () {
         "></div>`;
     }
 
-    // Countdown HTML
-    const hasCountdown = MAINTENANCE_END !== null;
-    const countdownHTML = hasCountdown ? `
-        <div id="maint-countdown">
-            <div class="cnt-box"><span class="cnt-num" id="cnt-h">00</span><span class="cnt-label">ساعات</span></div>
-            <div class="cnt-box"><span class="cnt-num" id="cnt-m">00</span><span class="cnt-label">دقائق</span></div>
-            <div class="cnt-box"><span class="cnt-num" id="cnt-s">00</span><span class="cnt-label">ثواني</span></div>
-        </div>
-    ` : '';
-
-    document.body.innerHTML = `
-        <div id="maint-page">
-            <div id="maint-stars">${starsHTML}</div>
-            <div id="maint-orb1"></div>
-            <div id="maint-orb2"></div>
-
-            <div id="maint-card">
-                <div id="maint-gears">
-                    <span class="gear-big">⚙️</span>
-                    <span class="gear-small">⚙️</span>
-                </div>
-
-                <h1 id="maint-title">تحت الصيانة</h1>
-                <p id="maint-sub">
-                    نعمل على تحسين موقعنا<br>
-                    لنقدم لك <strong>تجربة أفضل</strong> 🚀
-                </p>
-
-                <div class="maint-divider"></div>
-
-                <div id="maint-progress-wrap">
-                    <div id="maint-progress-bar"></div>
-                </div>
-                <div id="maint-progress-label">جارٍ العمل... Working in progress</div>
-
-                ${countdownHTML}
-
-                <a id="maint-btn" href="${CONTACT_LINK}" target="_blank">
-                    <span>📱</span>
-                    <span>تواصل معنا</span>
-                </a>
-
-                <p id="maint-footer">© فيديو برو — سنعود قريباً ✦</p>
-            </div>
-        </div>
-    `;
+  
+    
 
     // Countdown timer
     if (hasCountdown) {
