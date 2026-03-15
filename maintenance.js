@@ -2,7 +2,7 @@
 // MAINTENANCE MODE TOGGLE
 // Set this to true to enable maintenance mode
 // ============================
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 // Maintenance end time (set to null to hide countdown)
 const MAINTENANCE_END = null; // e.g. new Date(‘2025-06-01T12:00:00’)
