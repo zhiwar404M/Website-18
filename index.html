@@ -2,513 +2,121 @@
 
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فيديو برو - منصة الفيديو الاحترافية</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
-
-<!-- Maintenance Mode -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فيديو برو - منصة الفيديو</title>
+<link rel="stylesheet" href="index.css">
 <script src="maintenance.js"></script>
-
-<!-- MyBidAds Script -->
 <script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
-<!-- Adsterra Script -->
-<script async="async" data-cfasync="false" src="https://pl28918176.effectivegatecpm.com/09969d17eed32367801375b22396a66f/invoke.js"></script>
-<div id="container-09969d17eed32367801375b22396a66f"></div>
-<script src="https://pl28918155.effectivegatecpm.com/47/ee/64/47ee642142e82f5314d8cfacc2b8e16b.js"></script>
-<script src="https://pl28918167.effectivegatecpm.com/ee/4b/e2/ee4be2bdfa32eecb332d6496eef7186a.js"></script>
-<!-- PropellerAds Script -->
+<script async src="//adsterra.com/smaill.js"></script>
 <script async src="https://cdn.propellerads.com/js/pa.js"></script>
-<!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"></script>
-
-
 </head>
 <body>
 
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
 
-<!-- Floating Particles -->
-<div id="particles"></div>
-
-<script async src="https://js.mbidadm.com/static/scripts.js" data-admpid="430633"></script>
-
-<!-- HEADER -->
-<header>
-    <div class="container">
-        <nav>
-            <div class="logo">
-                <i class="icon">▶️</i>
-                <span>فيديو برو</span>
-            </div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="ابحث عن فيديو...">
-                <span class="search-icon">🔍</span>
-            </div>
-        </nav>
+<div class="topbar">
+    <a class="topbar-logo" href="index.html">
+        <div class="topbar-logo-icon">▶</div>
+        <span>فيديو برو</span>
+    </a>
+    <div class="topbar-badge">
+        <div class="live-dot"></div>
+        مباشر الآن
     </div>
-</header>
+</div>
 
-<div class="ad-container ad-top">
+<div class="ad-index" style="margin-top:90px;">
     <div data-banner-id="2017789"></div>
 </div>
 
-<!-- MAIN CONTENT -->
-<main>
-    <div class="container">
-        <div class="page-header">
-            <h1>مكتبة الفيديو</h1>
-            <p>استكشف مجموعة متنوعة من الفيديوهات عالية الجودة</p>
-        </div>
-
-        <div class="videos-grid" id="videosGrid"></div>
-        <div class="no-results hidden" id="noResults">
-            <p>لا توجد نتائج للبحث</p>
-        </div>
+<div class="page">
+    <div class="hero">
+        <div class="hero-eyebrow"><span>✦</span><span>منصة الفيديو الاحترافية</span><span>✦</span></div>
+        <h1 class="hero-title">
+            <span class="line1">اختر</span>
+            <span class="line2">تصنيفك</span>
+        </h1>
+        <p class="hero-sub">استكشف مكتبة ضخمة من الفيديوهات عالية الجودة</p>
     </div>
-</main>
 
-<div class="ad-container ad-between">
-    <div data-banner-id="2017790"></div>
+```
+<div class="cards">
+    <a class="card arabic" href="arabic.html">
+        <div class="card-glow"></div>
+        <div class="card-line"></div>
+        <div class="card-num">01</div>
+        <div class="card-icon-wrap">🌙</div>
+        <div class="card-name">عربي</div>
+        <p class="card-desc">فيديوهات عربية متنوعة<br>بجودة عالية وتحديث مستمر</p>
+        <div class="card-cta"><span>مشاهدة الآن</span><span class="cta-arrow">←</span></div>
+    </a>
+    <a class="card foreign" href="foreign.html">
+        <div class="card-glow"></div>
+        <div class="card-line"></div>
+        <div class="card-num">02</div>
+        <div class="hot-tag">🔥 HOT</div>
+        <div class="card-icon-wrap">🌍</div>
+        <div class="card-name">أجنبي</div>
+        <p class="card-desc">أفضل المحتوى الأجنبي<br>من مختلف أنحاء العالم</p>
+        <div class="card-cta"><span>مشاهدة الآن</span><span class="cta-arrow">←</span></div>
+    </a>
+    <a class="card kurdish" href="kurdish.html">
+        <div class="card-glow"></div>
+        <div class="card-line"></div>
+        <div class="card-num">03</div>
+        <div class="card-icon-wrap">🦅</div>
+        <div class="card-name" style="font-size:24px;">کوردی</div>
+        <p class="card-desc" style="direction:rtl;">ڤیدیۆی کوردی بە کوالێتیی بەرز<br>و نوێکردنەوەی بەردەوام</p>
+        <div class="card-cta"><span>سەیر بکە</span><span class="cta-arrow">←</span></div>
+    </a>
 </div>
 
-<!-- VIDEO MODAL -->
-<div class="modal" id="videoModal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
+<div class="footer-line"><span>© فيديو برو 2025</span></div>
+```
 
-        <div class="ad-container ad-modal-top">
-            <div data-banner-id="2017791"></div>
-        </div>
-
-        <div class="video-wrapper" id="videoWrapper"></div>
-        <div class="video-info" id="videoInfo"></div>
-
-        <div class="ad-container ad-modal-bottom">
-            <div data-banner-id="2017794"></div>
-        </div>
-    </div>
 </div>
 
-<div class="ad-container ad-bottom">
+<div class="ad-index">
     <div data-banner-id="2017795"></div>
 </div>
 
 <script>
-    // ============================
-    // PARTICLES BACKGROUND
-    // ============================
-    (function() {
-        const container = document.getElementById('particles');
-        const colors = ['#e63946', '#ff6b35', '#ffd60a'];
-        for (let i = 0; i < 18; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.cssText = `
-                position: fixed;
-                width: ${Math.random() * 3 + 1}px;
-                height: ${Math.random() * 3 + 1}px;
-                border-radius: 50%;
-                background: ${colors[Math.floor(Math.random() * colors.length)]};
-                left: ${Math.random() * 100}vw;
-                opacity: 0;
-                pointer-events: none;
-                z-index: 0;
-                animation: floatParticle ${Math.random() * 15 + 10}s linear ${Math.random() * 8}s infinite;
-            `;
-            container.appendChild(p);
-        }
-    })();
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-5}px,${my-5}px)`;});
+(function animRing(){rx+=(mx-rx-18)*0.12;ry+=(my-ry-18)*0.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(animRing);})();
 
-    // ============================
-    // VIDEO DATA (unchanged)
-    // ============================
-    const videos = [
-        {
-            id: 1,
-            title: 'فيديو اجنبية',
-            thumbnail: 'https://picsum.photos/400/250?random=1',
-            duration: '15:30',
-            views: '١٫٢ ألف',
-            uploaded: 'منذ يومين',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/elB498DqQkCYR9A/'
-        },
-        {
-            id: 2,
-            title: 'فيديو اجنبية',
-            thumbnail: 'https://picsum.photos/400/250?random=2',
-            duration: '22:45',
-            views: '٣٫٥ ألف',
-            uploaded: 'منذ ٥ أيام',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/kPMK6JxorxIrZk/'
-        },
-        {
-            id: 3,
-            title: ' فيديوو عربية',
-            thumbnail: 'https://picsum.photos/400/250?random=3',
-            duration: '18:20',
-            views: '٢٫١ ألف',
-            uploaded: 'منذ أسبوع',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/0813Vmav33sb1wV/'
-        },
-        {
-            id: 4,
-            title: 'فيديوو  عربية ',
-            thumbnail: 'https://picsum.photos/400/250?random=4',
-            duration: '25:10',
-            views: '٤ آلاف',
-            uploaded: 'منذ ٣ أيام',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/KzzBq276mDIJz7/'
-        },
-        {
-            id: 5,
-            title: 'فيديو اجنبية',
-            thumbnail: 'https://picsum.photos/400/250?random=1',
-            duration: '15:30',
-            views: '١٫٢ ألف',
-            uploaded: 'منذ يومين',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/v9LLkpxjO6C44Pw/'
-        },
-        {
-            id: 6,
-            title: 'فيديو اجنبية',
-            thumbnail: 'https://picsum.photos/400/250?random=2',
-            duration: '22:45',
-            views: '٣٫٥ ألف',
-            uploaded: 'منذ ٥ أيام',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/eP8waxpA9ATYWoR/'
-        },
-        {
-            id: 7,
-            title: ' فيديوو اجنبية',
-            thumbnail: 'https://picsum.photos/400/250?random=3',
-            duration: '18:20',
-            views: '٢٫١ ألف',
-            uploaded: 'منذ أسبوع',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/ZDwAXoZBB7Hqar2/'
-        },
-        {
-            id: 8,
-            title: 'فيديوو  عربية ',
-            thumbnail: 'https://picsum.photos/400/250?random=4',
-            duration: '25:10',
-            views: '٤ آلاف',
-            uploaded: 'منذ ٣ أيام',
-            description: 'س*كس و افلام اجنبية',
-            videoUrl: 'https://streamtape.com/e/7KXDLVXbPLiAOVY/'
-        }
-    ];
+/* CANVAS */
+const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
+let W,H,parts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+class P{constructor(){this.reset();this.y=Math.random()*H;}reset(){this.x=Math.random()*W;this.y=H+10;this.sz=Math.random()*1.8+0.4;this.sp=Math.random()*0.6+0.2;this.op=Math.random()*0.5+0.1;this.col=[[230,57,70],[255,107,53],[255,214,10],[108,99,255],[79,142,247],[34,197,94]][Math.floor(Math.random()*6)];this.dr=(Math.random()-0.5)*0.3;}update(){this.y-=this.sp;this.x+=this.dr;this.op-=0.001;if(this.y<-10||this.op<=0)this.reset();}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);ctx.fillStyle=`rgba(${this.col[0]},${this.col[1]},${this.col[2]},${this.op})`;ctx.fill();}}
+for(let i=0;i<90;i++)parts.push(new P());
+const orbs=[{x:0.15,y:0.2,r:350,c:[230,57,70],a:0.07},{x:0.85,y:0.75,r:300,c:[108,99,255],a:0.06},{x:0.5,y:0.5,r:250,c:[255,107,53],a:0.04},{x:0.1,y:0.85,r:200,c:[34,197,94],a:0.05}];
+let t=0;
+function draw(){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#05070b';ctx.fillRect(0,0,W,H);
+    orbs.forEach((o,i)=>{const ox=o.x*W+Math.sin(t*0.3+i)*60,oy=o.y*H+Math.cos(t*0.25+i)*40,g=ctx.createRadialGradient(ox,oy,0,ox,oy,o.r);g.addColorStop(0,`rgba(${o.c[0]},${o.c[1]},${o.c[2]},${o.a})`);g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);});
+    ctx.strokeStyle='rgba(255,255,255,0.025)';ctx.lineWidth=1;
+    for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    parts.forEach(p=>{p.update();p.draw();});
+    t+=0.008;requestAnimationFrame(draw);
+}
+draw();
 
-    // ============================
-    // DISPLAY VIDEOS
-    // ============================
-    function displayVideos(list) {
-        const grid = document.getElementById('videosGrid');
-        const noResults = document.getElementById('noResults');
-
-        if (!list || !list.length) {
-            grid.classList.add('hidden');
-            noResults.classList.remove('hidden');
-            return;
-        }
-
-        grid.classList.remove('hidden');
-        noResults.classList.add('hidden');
-
-        grid.innerHTML = list.map((video, index) => {
-            let adPlacement = '';
-            if ((index + 1) % 4 === 0) {
-                adPlacement = '<div class="ad-container ad-grid-between"><div data-banner-id="2017792"></div></div>';
-            }
-            return `
-                <div class="video-card" data-id="${video.id}">
-                    <div class="thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-                        <span class="duration">${video.duration}</span>
-                        <div class="play-overlay">▶</div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="video-title">${video.title}</h3>
-                        <div class="meta">
-                            <span>👁️ ${video.views}</span>
-                            <span>📅 ${video.uploaded}</span>
-                        </div>
-                    </div>
-                </div>
-                ${adPlacement}
-            `;
-        }).join('');
-
-        document.querySelectorAll('.video-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const v = list.find(v => v.id == card.dataset.id);
-                if (v) openModal(v);
-            });
-        });
-
-        refreshAds();
-    }
-
-    // ============================
-    // OPEN MODAL
-    // ============================
-    function openModal(video) {
-        const modal = document.getElementById('videoModal');
-        const wrapper = document.getElementById('videoWrapper');
-        const info = document.getElementById('videoInfo');
-
-        wrapper.innerHTML = `
-            <div class="streamtape-container">
-                <iframe 
-                    src="${video.videoUrl}" 
-                    allowfullscreen 
-                    allow="autoplay; fullscreen"
-                    frameborder="0"
-                    scrolling="no">
-                </iframe>
-            </div>
-        `;
-
-        info.innerHTML = `
-            <h2>${video.title}</h2>
-            <div class="meta-details">
-                <span>👁️ ${video.views}</span>
-                <span>⏱️ ${video.duration}</span>
-                <span>📅 ${video.uploaded}</span>
-            </div>
-            <p class="description">${video.description}</p>
-        `;
-
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => refreshAds(), 500);
-    }
-
-    // ============================
-    // CLOSE MODAL
-    // ============================
-    function closeModal() {
-        const modal = document.getElementById('videoModal');
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
-        document.getElementById('videoWrapper').innerHTML = '';
-    }
-
-    // ============================
-    // REFRESH ADS
-    // ============================
-    function refreshAds() {
-        try { if (typeof window.stbVolume !== 'undefined') window.stbVolume.refresh(); } catch(e) {}
-        try { if (window.myBidAdsQueue) window.myBidAdsQueue.push(function() { window.myBidAds && window.myBidAds.refresh(); }); } catch(e) {}
-        try { if (window._paq) window._paq.push(['trackPageView']); } catch(e) {}
-    }
-
-    // ============================
-    // SEARCH
-    // ============================
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const term = e.target.value.trim().toLowerCase();
-        if (!term) { displayVideos(videos); return; }
-        const filtered = videos.filter(v => v.title.includes(term) || v.description.includes(term));
-        displayVideos(filtered);
-    });
-
-    // ============================
-    // CLOSE MODAL EVENTS
-    // ============================
-    document.getElementById('closeModal').addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal')) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // ============================
-    // INIT
-    // ============================
-    displayVideos(videos);
+/* 3D TILT */
+document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),dx=(e.clientX-r.left-r.width/2)/(r.width/2),dy=(e.clientY-r.top-r.height/2)/(r.height/2);card.style.transform=`perspective(1000px) rotateY(${dx*10}deg) rotateX(${-dy*10}deg) scale(1.03)`;});
+    card.addEventListener('mouseleave',()=>{card.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';});
+});
 </script>
-
-<style>
-    @keyframes floatParticle {
-        0% { transform: translateY(100vh) scale(0); opacity: 0; }
-        10% { opacity: 0.5; }
-        90% { opacity: 0.2; }
-        100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-    }
-</style>
-
-<!-- AD BLOCKER OVERLAY -->
-<div id="adBlockOverlay" style="display:none; position:fixed; inset:0; z-index:99998;
-    background:rgba(0,0,0,0.96); backdrop-filter:blur(16px);
-    align-items:center; justify-content:center; padding:20px; font-family:'Cairo',sans-serif; direction:rtl;">
-    <div style="
-        background:linear-gradient(135deg,#111520,#0d1117);
-        border:1px solid rgba(230,57,70,0.3);
-        border-radius:24px; padding:48px 36px;
-        max-width:460px; width:100%; text-align:center;
-        box-shadow:0 40px 80px rgba(0,0,0,0.9), 0 0 60px rgba(230,57,70,0.1);
-        position:relative; overflow:hidden;
-        animation: adbSlideIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
-    ">
-        <!-- Top gradient bar -->
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;
-            background:linear-gradient(90deg,#e63946,#ff6b35,#ffd60a,#ff6b35,#e63946);
-            background-size:200% 100%;
-            animation:gradBar 3s linear infinite;"></div>
-
-        <!-- Icon -->
-        <div style="font-size:64px; margin-bottom:20px; animation: iconPulse 1.5s ease-in-out infinite;">🚫</div>
-
-        <!-- Title -->
-        <h2 style="font-size:26px; font-weight:900; margin-bottom:14px;
-            background:linear-gradient(135deg,#fff,#ff6b35,#e63946);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-            تم اكتشاف مانع إعلانات
-        </h2>
-
-        <!-- Message -->
-        <p style="color:#8892aa; font-size:15px; line-height:2; margin-bottom:28px;">
-            يبدو أنك تستخدم برنامج حجب الإعلانات.<br>
-            الإعلانات هي مصدر دعمنا الوحيد للاستمرار.<br>
-            <span style="color:#ff6b35; font-weight:700;">يرجى تعطيله لمشاهدة الفيديوهات.</span>
-        </p>
-
-        <!-- Steps -->
-        <div style="background:rgba(255,107,53,0.06); border:1px solid rgba(255,107,53,0.15);
-            border-radius:12px; padding:16px 20px; margin-bottom:24px; text-align:right;">
-            <p style="color:#f0f4ff; font-size:13px; line-height:2.2; margin:0;">
-                ١. افتح إعدادات المتصفح<br>
-                ٢. ابحث عن الإضافات (Extensions)<br>
-                ٣. عطّل مانع الإعلانات مؤقتاً<br>
-                ٤. أعد تحميل الصفحة 🔄
-            </p>
-        </div>
-
-        <!-- Button -->
-        <button onclick="recheckAdBlock()" style="
-            background:linear-gradient(135deg,#e63946,#ff6b35);
-            color:white; border:none; cursor:pointer;
-            padding:13px 32px; border-radius:50px;
-            font-family:'Cairo',sans-serif; font-size:15px; font-weight:700;
-            box-shadow:0 0 24px rgba(230,57,70,0.45);
-            transition:all 0.3s; width:100%;
-        "
-        onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 36px rgba(230,57,70,0.6)'"
-        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 24px rgba(230,57,70,0.45)'"
-        >
-            ✅ لقد عطّلته — أعد التحقق
-        </button>
-    </div>
-    <style>
-        @keyframes adbSlideIn {
-            from { transform: scale(0.8) translateY(40px); opacity:0; }
-            to   { transform: scale(1) translateY(0);   opacity:1; }
-        }
-        @keyframes gradBar {
-            0%   { background-position: 0%   50%; }
-            100% { background-position: 200% 50%; }
-        }
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0px #e63946); }
-            50%      { transform: scale(1.12); filter: drop-shadow(0 0 14px #e63946); }
-        }
-    </style>
-</div>
-
-<!-- AD BLOCKER DETECTION SCRIPT -->
-<script>
-    // ============================
-    // AD BLOCKER DETECTION
-    // ============================
-
-    // A tiny bait element ad blockers typically hide
-    var baitAd = document.createElement('div');
-    baitAd.setAttribute('class', 'pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links ad-text adSense adBlock adContent adBanner');
-    baitAd.setAttribute('style', 'width:1px!important;height:1px!important;position:absolute!important;left:-9999px!important;top:-9999px!important;');
-    document.body.appendChild(baitAd);
-
-    function isAdBlockActive() {
-        // Method 1: bait element hidden or removed
-        if (!baitAd || baitAd.offsetParent === null || baitAd.offsetHeight === 0 ||
-            baitAd.offsetWidth === 0 || baitAd.clientHeight === 0 || baitAd.clientWidth === 0) {
-            return true;
-        }
-        // Method 2: computed style blocked
-        try {
-            var cs = window.getComputedStyle(baitAd);
-            if (cs && (cs.getPropertyValue('display') === 'none' ||
-                       cs.getPropertyValue('visibility') === 'hidden' ||
-                       cs.getPropertyValue('opacity') === '0')) {
-                return true;
-            }
-        } catch(e) {}
-        return false;
-    }
-
-    function showAdBlockWarning() {
-        var overlay = document.getElementById('adBlockOverlay');
-        overlay.style.display = 'flex';
-        // Block video grid from being shown
-        var grid = document.getElementById('videosGrid');
-        if (grid) grid.innerHTML = '';
-    }
-
-    function hideAdBlockWarning() {
-        var overlay = document.getElementById('adBlockOverlay');
-        overlay.style.display = 'none';
-    }
-
-    // Called when user clicks "I disabled it"
-    function recheckAdBlock() {
-        if (isAdBlockActive()) {
-            // Shake the card to indicate still detected
-            var card = document.querySelector('#adBlockOverlay > div');
-            if (card) {
-                card.style.animation = 'none';
-                card.style.border = '1px solid rgba(230,57,70,0.8)';
-                card.style.boxShadow = '0 0 40px rgba(230,57,70,0.4)';
-                setTimeout(() => {
-                    card.style.border = '1px solid rgba(230,57,70,0.3)';
-                    card.style.boxShadow = '0 40px 80px rgba(0,0,0,0.9), 0 0 60px rgba(230,57,70,0.1)';
-                }, 800);
-            }
-        } else {
-            hideAdBlockWarning();
-            displayVideos(videos);
-            refreshAds();
-        }
-    }
-
-    // Run check after a short delay (ads need time to load)
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            if (isAdBlockActive()) {
-                showAdBlockWarning();
-            }
-        }, 1200);
-    });
-
-    // Also periodically re-check (every 5 seconds) in case user disables mid-session
-    setInterval(function() {
-        var overlay = document.getElementById('adBlockOverlay');
-        if (overlay && overlay.style.display === 'none') {
-            if (isAdBlockActive()) showAdBlockWarning();
-        }
-    }, 5000);
-</script>
-
 
 </body>
 </html>
